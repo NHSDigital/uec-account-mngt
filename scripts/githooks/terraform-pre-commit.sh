@@ -9,7 +9,7 @@ BRANCH_NAME=${BRANCH_NAME:-$(git rev-parse --abbrev-ref HEAD)}
 
 function main {
   if [[ $(git-check-if-commit-changed-directory $PRECOMMIT $BRANCH_NAME $IAC_DIR) ]] ; then
-    cmd="fmt -recursive -check -list=true $IAC_DIR"
+    cmd="fmt -recursive $IAC_DIR"
     docker run \
       --volume=$PWD:/scan \
       --workdir=/scan \

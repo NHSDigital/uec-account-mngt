@@ -12,10 +12,10 @@ variable "lifecycle_rule_inputs" { default = [] }
 
 variable "target_access_logging_bucket" {
   description = "The name of the bucket where S3 to store server access logs"
-  default = null
+  default     = null
 }
 
 variable "target_access_logging_prefix" {
   description = "A prefix for all log object keys"
-  default = null
+  default     = null
 }
