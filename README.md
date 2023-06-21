@@ -1,12 +1,12 @@
-# Repository Template
+# uec dos account mngt
 
-Start with an overview or a brief description of what the project is about and what it does.
+This is the account level management repository for all of the UEC DoS AWS accounts.
 
 There is an expectation that each file of this repository template is concise and self-documented.
 
 ## Table of Contents
 
-- [Repository Template](#repository-template)
+- [uec dos account mngt](#uec-dos-account-mngt)
   - [Table of Contents](#table-of-contents)
   - [Installation](#installation)
     - [Prerequisites](#prerequisites)
@@ -48,6 +48,10 @@ The [C4 model](https://c4model.com/) is a simple and intuitive way to create sof
 Most of the projects are built with customisability and extendability in mind. At a minimum, this can be achieved by implementing service level configuration options and settings. The intention of this section is to show how this can be used. If the system processes data, you could mention here for example how the input is prepared for testing - anonymised, synthetic or live data.
 
 ## Contributing
+
+To ensure consistency and turn on the required githooks contributors must run the following script from the project root see below
+
+/bin/bash scripts/git/git-config-set-up.sh
 
 Describe or link templates on how to raise an issue, feature request or make a contribution to the codebase. Reference the other documentation files, like
 
