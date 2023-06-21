@@ -45,8 +45,8 @@ function main() {
   else
 
     # Check changed files only
-    files=$( (git diff --diff-filter=ACMRT --name-only ${BRANCH_NAME:-origin/main}; git diff --name-only) | sort | uniq )
-    if [ -n "$files" ]; then
+    changed_files=$(git diff --diff-filter=ACMRT --name-only ${BRANCH_NAME:-origin/main})
+    if [ -n "$changed_files" ]; then
       while read file; do
         docker run --rm --platform linux/amd64 \
           --volume=$PWD:/check \
@@ -55,7 +55,7 @@ function main() {
               --exclude '.git/' \
               "$file"
         [ $? != 0 ] && exit_code=1 ||:
-      done < <(echo "$files")
+      done < <(echo "$changed_files")
     fi
 
   fi
