@@ -1,2 +1,2 @@
-project_owner="nhs-uec"
-project="nhse-uec-dos"
+project_owner = "nhs-uec"
+project       = "nhse-uec-dos"
