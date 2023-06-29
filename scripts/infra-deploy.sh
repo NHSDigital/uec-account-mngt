@@ -6,7 +6,6 @@ STACK=$2
 ENVIRONMENT=$3
 
 # functions
-source ./scripts/functions/file-functions.sh
 source ./scripts/functions/terraform-functions.sh
 
 COMMON_TF_VARS_FILE="common.tfvars"

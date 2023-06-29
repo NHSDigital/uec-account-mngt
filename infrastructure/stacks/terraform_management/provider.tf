@@ -17,9 +17,9 @@ provider "aws" {
 
   default_tags {
     tags = {
-      owner               = "PROGRAM_TO_REPLACE"
-      project             = "PROGRAM_CODE_TO_REPLACE"
-      environment         = "ENVIRONMENT_TO_REPLACE"
+      owner               = var.project_owner
+      project             = var.project
+      environment         = var.environment
       terraform-base-path = replace(path.cwd, "/^.*?(${local.terraform-git-repo}\\/)/", "$1")
     }
   }
