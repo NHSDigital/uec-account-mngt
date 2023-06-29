@@ -18,6 +18,7 @@ provider "aws" {
   default_tags {
     tags = {
 <<<<<<< main:infrastructure/shared/provider.tf
+<<<<<<< main:infrastructure/shared/provider.tf
       owner               = var.project_owner
       project             = var.project
       environment         = var.environment
@@ -26,6 +27,11 @@ provider "aws" {
       project             = "PROGRAM_CODE_TO_REPLACE"
       environment         = "ENVIRONMENT_TO_REPLACE"
 >>>>>>> DR-74 Poc to replace and tf init plan:infrastructure/stacks/terraform_management/provider.tf
+=======
+      owner               = var.project_owner
+      project             = var.project
+      environment         = var.environment
+>>>>>>> DR-62 Remove dead code:infrastructure/stacks/terraform_management/provider.tf
       terraform-base-path = replace(path.cwd, "/^.*?(${local.terraform-git-repo}\\/)/", "$1")
     }
   }
