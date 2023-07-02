@@ -5,6 +5,8 @@ ACTION=$1
 STACK=$2
 ENVIRONMENT=$3
 PROJECT=$4
+USE_REMOTE_STATE_STORE="${4:-true}"
+
 # functions
 source ./scripts/functions/terraform-functions.sh
 
@@ -20,7 +22,7 @@ STACK_DIR=$PWD/$INFRASTRUCTURE_DIR/stacks/$STACK
 # switch to target stack directory ahead of tf init/plan/apply
 cd "$STACK_DIR" || exit
 # init terraform
-terraform-initialise $STACK $ENVIRONMENT true
+terraform-initialise "$STACK" "$ENVIRONMENT" "$USE_REMOTE_STATE_STORE"
 # plan
 if [ -n "$ACTION" ] && [ "$ACTION" = 'plan' ] ; then
   terraform plan \
