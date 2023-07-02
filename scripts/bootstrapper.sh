@@ -8,9 +8,10 @@
 #  - They are NOT set in this script to avoid details being stored in repo
 
 export REPO_NAME="${REPO_NAME:-""}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
+export AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID:-""}"            # The account number of the AWS account into which you intend to deploy
 export AWS_REGION="${AWS_REGION:-""}"                             # The AWS region into which you intend to deploy the application (where the terraform bucket will be created) eg eu-west-2
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"                        # Identify the application to be hosted in the account eg dos or cm - used to built terraform bucket name
-export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"                    # Identify the purpose of the account/environment (one of dev,test,security,preprod or prod) usually part of the account name
+export ACCOUNT_ENVIRONMENT="${ACCOUNT_ENVIRONMENT:-""}"                    # Identify the purpose of the account/environment (one of dev,test,security,preprod or prod) usually part of the account name
 
 # check exports have been done
 EXPORTS_SET=0
