@@ -1,14 +1,15 @@
 #! /bin/bash
-# eg arguments/parameters plan iam-policy dev
+# eg arguments/parameters plan iam-policy dev dos
 
 ACTION=$1
 STACK=$2
 ENVIRONMENT=$3
-
+PROJECT=$4
 # functions
 source ./scripts/functions/terraform-functions.sh
 
 COMMON_TF_VARS_FILE="common.tfvars"
+PROJECT_TF_VARS_FILE="$PROJECT-project.tfvars"
 ENV_TF_VARS_FILE="$ENVIRONMENT.tfvars"
 echo "Preparing to run terraform $ACTION for stack $STACK for environment $ENVIRONMENT"
 ROOT_DIR=$PWD
@@ -24,17 +25,20 @@ terraform-initialise $STACK $ENVIRONMENT true
 if [ -n "$ACTION" ] && [ "$ACTION" = 'plan' ] ; then
   terraform plan \
   -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$COMMON_TF_VARS_FILE \
+  -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$PROJECT_TF_VARS_FILE \
   -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
 
 if [ -n "$ACTION" ] && [ "$ACTION" = 'apply' ] ; then
   terraform apply -auto-approve \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$COMMON_TF_VARS_FILE \
+    -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$PROJECT_TF_VARS_FILE \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
 
 if [ -n "$ACTION" ] && [ "$ACTION" = 'destroy' ] ; then
   terraform destroy -auto-approve\
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$COMMON_TF_VARS_FILE \
+    -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$PROJECT_TF_VARS_FILE \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
