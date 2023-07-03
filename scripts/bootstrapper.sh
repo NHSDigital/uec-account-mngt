@@ -8,7 +8,6 @@
 #  - They are NOT set in this script to avoid details being stored in repo
 
 export REPO_NAME="${REPO_NAME:-""}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
-export AWS_ACCOUNT_ID="${AWS_ACCOUNT_ID:-""}"            # The account number of the AWS account into which you intend to deploy
 export AWS_REGION="${AWS_REGION:-""}"                             # The AWS region into which you intend to deploy the application (where the terraform bucket will be created) eg eu-west-2
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"                        # Identify the application to be hosted in the account eg dos or cm - used to built terraform bucket name
 export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"                    # Identify the purpose of the account/environment (one of dev,test,security,preprod or prod) usually part of the account name
@@ -18,11 +17,6 @@ EXPORTS_SET=0
 # Check key variables have been exported - see above
 if [ -z "$REPO_NAME" ] ; then
   echo Set REPO_NAME to name of the repo where the code to be accessed by github runner is stored
-  EXPORTS_SET=1
-fi
-
-if [ -z "$AWS_ACCOUNT_ID" ] ; then
-  echo Set AWS_ACCOUNT_ID to number of the AWS account to be updated
   EXPORTS_SET=1
 fi
 
