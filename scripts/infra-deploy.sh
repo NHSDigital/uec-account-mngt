@@ -1,11 +1,11 @@
 #! /bin/bash
-# eg arguments/parameters plan iam-policy dev dos
+# eg arguments/parameters plan iam-policy dev dos false
 
 ACTION=$1
 STACK=$2
 ENVIRONMENT=$3
 PROJECT=$4
-USE_REMOTE_STATE_STORE="${4:-true}"
+USE_REMOTE_STATE_STORE="${5:-true}"
 
 # functions
 source ./scripts/functions/terraform-functions.sh

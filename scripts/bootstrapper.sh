@@ -64,7 +64,7 @@ export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
 # ------------- Step one tf state bucket, state locks and account alias -----------
 # needs to be false as there is no remote backend
 # TODO change plan to apply
-/bin/bash ./scripts/infra-deploy.sh plan terraform_management "$ACCOUNT_TYPE" false
+/bin/bash ./scripts/infra-deploy.sh plan terraform_management "$ACCOUNT_TYPE" "$ACCOUNT_PROJECT" false
 
 # ------------- Step three create  thumbprint for github actions -----------
 export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openid-configuration)
@@ -77,7 +77,7 @@ export TF_VAR_oidc_provider_url="https://token.actions.githubusercontent.com"
 export TF_VAR_oidc_thumbprint=$THUMBPRINT
 export TF_VAR_oidc_client="sts.amazonaws.com"
 # TODO change plan to apply
-/bin/bash ./scripts/infra-deploy.sh plan github-runner "$ACCOUNT_TYPE"
+/bin/bash ./scripts/infra-deploy.sh plan github-runner "$ACCOUNT_TYPE" "$ACCOUNT_PROJECT"
 
 
 #  via cli
