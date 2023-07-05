@@ -1,10 +1,10 @@
 #! /bin/bash
-# eg arguments/parameters plan iam-policy dev dos
+# You will need to export
+# ACTION eg plan, apply, destroy
+# STACK eg iam-policy
+# ENVIRONMENT eg dev,test
+# PROJECT eg dos or cm
 
-# ACTION=$1
-# STACK=$2
-# ENVIRONMENT=$3
-# PROJECT=$4
 # functions
 source ./scripts/functions/terraform-functions.sh
 
@@ -80,6 +80,6 @@ if [ -n "$ACTION" ] && [ "$ACTION" = 'destroy' ] ; then
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
 # remove temp files
-rm -f "$STACK_DIR"/shared/locals.tf
+rm -f "$STACK_DIR"/locals.tf
 rm -f "$STACK_DIR"/provider.tf
 rm -f "$STACK_DIR"/versions.tf
