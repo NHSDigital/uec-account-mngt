@@ -59,7 +59,12 @@ export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
 # ------------- Step one tf state bucket, state locks and account alias -----------
 # needs to be false as there is no remote backend
 # TODO change plan to apply
-/bin/bash ./scripts/infra-deploy.sh plan terraform_management "$ACCOUNT_TYPE" "$ACCOUNT_PROJECT" false
+export ACTION=plan
+export ENVIRONMENT="$ACCOUNT_TYPE"
+export PROJECT="$ACCOUNT_PROJECT"
+export STACK=terraform_management
+export USE_REMOTE_STATE_STORE=true
+/bin/bash ./scripts/infra-deploy.sh
 
 # ------------- Step three create  thumbprint for github actions -----------
 export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openid-configuration)
@@ -71,33 +76,6 @@ export TF_VAR_repo_name=$REPO_NAME
 export TF_VAR_oidc_provider_url="https://token.actions.githubusercontent.com"
 export TF_VAR_oidc_thumbprint=$THUMBPRINT
 export TF_VAR_oidc_client="sts.amazonaws.com"
-# TODO change plan to apply
-/bin/bash ./scripts/infra-deploy.sh plan github-runner "$ACCOUNT_TYPE" "$ACCOUNT_PROJECT"
-
-
-#  via cli
-
-# ------------- Step one tf state bucket and state locks -----------
-# uncomment to do it via cli
-# aws s3api create-bucket --acl private --bucket $TERRAFORM_BUCKET_NAME --region $AWS_REGION --create-bucket-configuration LocationConstraint=$AWS_REGION
-# aws s3api put-public-access-block --bucket $TERRAFORM_BUCKET_NAME  --public-access-block-configuration '{"BlockPublicAcls": true, "IgnorePublicAcls": true, "BlockPublicPolicy": true, "RestrictPublicBuckets": true}'
-
-# ------------- Step two create an account alias -----------
-# uncomment to do it via cli
-# aws iam create-account-alias --account-alias $ACCOUNT_ALIAS
-
-# ------------- Step three create oidc identity provider thumbprint for github actions -----------
-# uncomment to create thumbprint
-# export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openid-configuration)
-# export CERT_URL=$(jq -r '.jwks_uri | split("/")[2]' <<< $HOST)
-# export THUMBPRINT=$(echo | openssl s_client -servername $CERT_URL -showcerts -connect $CERT_URL:443 2> /dev/null | tac | sed -n '/-----END CERTIFICATE-----/,/-----BEGIN CERTIFICATE-----/p; /-----BEGIN CERTIFICATE-----/q' | tac | openssl x509 -sha1 -fingerprint -noout | sed 's/://g' | awk -F= '{print tolower($2)}')
-
-
-# ------------- Step four create github runner role and policies for that role -----------
-# uncomment to create oidc provider
-# aws iam create-open-id-connect-provider --url "https://token.actions.githubusercontent.com" --client-id-list "sts.amazonaws.com" --thumbprint-list ["$THUMBPRINT"]
-# uncomment to create role via cli
-# aws iam create-role --role-name github --assume-role-policy-document "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Principal\":{\"Federated\":\"arn:aws:iam::$AWS_ACCOUNT:oidc-provider/token.actions.githubusercontent.com\"},\"Action\":\"sts:AssumeRoleWithWebIdentity\",\"Condition\":{\"ForAllValues:StringLike\":{\"token.actions.githubusercontent.com:sub\":\"repo:$REPO_NAME:*\",\"token.actions.githubusercontent.com:aud\":\"sts.amazonaws.com\"}}}]}"
-# aws iam put-role-policy --role-name github --policy-name AdministratorAccess --policy-document "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}]}"
-
-
+export STACK=github-runner
+export USE_REMOTE_STATE_STORE=true
+/bin/bash ./scripts/infra-deploy.sh
