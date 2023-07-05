@@ -23,7 +23,7 @@ resource "aws_iam_role_policy" "runner_policy_1" {
 }
 
 resource "aws_iam_role" "github_runner_role" {
-  name = "GitHub_Runner"
+  name               = "GitHub_Runner"
   assume_role_policy = <<EOF
     {
       "Version":"2012-10-17",
