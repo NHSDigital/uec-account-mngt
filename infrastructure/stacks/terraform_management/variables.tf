@@ -7,4 +7,6 @@ variable "project_owner" {
 variable "environment" {
   description = "The environment - dev, test, staging etc"
 }
-
+variable "account_alias" {
+  description = "Alias for AWS account - usually equal to account name"
+}

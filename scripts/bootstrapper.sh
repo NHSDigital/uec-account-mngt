@@ -52,7 +52,7 @@ fi
 
 # derive and set the name of the bucket and the alias
 export TERRAFORM_BUCKET_NAME="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE-terraform-state"    # A globally unique name for your terraform remote state bucket
-# export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
+export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
 
 # create all but alias via terraform
 # ------------- Step one tf state bucket, state locks and account alias -----------
