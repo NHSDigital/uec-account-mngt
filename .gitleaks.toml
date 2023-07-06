@@ -7,3 +7,18 @@ useDefault = true # SEE: https://github.com/gitleaks/gitleaks/blob/master/config
 description = "IPv4"
 id = "ipv4"
 regex = '''[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'''
+
+# commented out pending further investigation
+# [[rules]]
+# id = "password"
+# description = "Passwords "
+# regex = '''(?i)(?:secret|key|signature|password|pwd|pass|token)(?:\w|\s*?)(?:=){1}(?:\s{0,10})[\"'`](.*?)[\"'`]'''
+# [[rules.Entropies]]
+#   Min = "3"
+#   Max = "7"
+#   Group = "1"
+
+# [[rules]]
+# id = "AWS account"
+# description = "AWS account number  - 12 digits"
+# regex = '''[0-9]{12}'''
