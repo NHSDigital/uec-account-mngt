@@ -1,10 +1,10 @@
 #! /bin/bash
-# eg arguments/parameters plan iam-policy dev dos false
+# You will need to export
+# ACTION eg plan, apply, destroy
+# STACK eg iam-policy
+# ENVIRONMENT eg dev,test
+# PROJECT eg dos or cm
 
-# ACTION=$1
-# STACK=$2
-# ENVIRONMENT=$3
-# PROJECT=$4
 # functions
 source ./scripts/functions/terraform-functions.sh
 
