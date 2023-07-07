@@ -50,10 +50,11 @@ ROOT_DIR=$PWD
 # the directory that holds the stack to terraform
 STACK_DIR=$PWD/$INFRASTRUCTURE_DIR/stacks/$STACK
 #  copy shared tf files to stack
-cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/locals.tf "$STACK_DIR"
-cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/provider.tf "$STACK_DIR"
-cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/versions.tf "$STACK_DIR"
-
+if [[ "$USE_REMOTE_STATE_STORE" =~ ^(true|yes|y|on|1|TRUE|YES|Y|ON) ]]; then
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/versions.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/locals.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/provider.tf "$STACK_DIR"
+fi
 # switch to target stack directory ahead of tf init/plan/apply
 cd "$STACK_DIR" || exit
 # init terraform
