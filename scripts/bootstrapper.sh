@@ -62,7 +62,7 @@ export ACTION=plan
 export ENVIRONMENT="$ACCOUNT_TYPE"
 export PROJECT="$ACCOUNT_PROJECT"
 export STACK=terraform_management
-export USE_REMOTE_STATE_STORE=true
+export USE_REMOTE_STATE_STORE=false
 /bin/bash ./scripts/infra-deploy.sh
 
 # ------------- Step three create  thumbprint for github actions -----------
