@@ -44,7 +44,7 @@ fi
 COMMON_TF_VARS_FILE="common.tfvars"
 PROJECT_TF_VARS_FILE="$PROJECT-project.tfvars"
 ENV_TF_VARS_FILE="$ENVIRONMENT.tfvars"
-echo "Preparing to run terraform $ACTION for stack $STACK for environment $ENVIRONMENT"
+echo "Preparing to run terraform $ACTION for stack $STACK for environment $ENVIRONMENT and project $PROJECT"
 ROOT_DIR=$PWD
 
 # the directory that holds the stack to terraform

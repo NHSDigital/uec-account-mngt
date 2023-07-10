@@ -58,7 +58,7 @@ export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
 # ------------- Step one tf state bucket, state locks and account alias -----------
 # needs to be false as there is no remote backend
 # TODO change plan to apply
-export ACTION=plan
+export ACTION=apply
 export ENVIRONMENT="$ACCOUNT_TYPE"
 export PROJECT="$ACCOUNT_PROJECT"
 export STACK=terraform_management
