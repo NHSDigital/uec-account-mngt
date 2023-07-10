@@ -6,7 +6,7 @@
 #  - Login to an appropriate AWS account as appropriate user via commamnd-line AWS-cli
 #  - Export the following variables appropriate for your account and github setup prior to calling this script
 #  - They are NOT set in this script to avoid details being stored in repo
-
+export ACTION="${ACTION:-"plan"}"                 # default action is plan
 export REPO_NAME="${REPO_NAME:-""}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
 export AWS_REGION="${AWS_REGION:-""}"                             # The AWS region into which you intend to deploy the application (where the terraform bucket will be created) eg eu-west-2
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"                        # Identify the application to be hosted in the account eg dos or cm - used to built terraform bucket name
@@ -15,6 +15,11 @@ export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"                    # Identify the purp
 # check exports have been done
 EXPORTS_SET=0
 # Check key variables have been exported - see above
+if [[ ! "$ACTION" =~ ^(plan|apply|destroy) ]]; then
+    echo ACTION must be one of following terraform actions - plan, apply or destroy
+    EXPORTS_SET=1
+fi
+
 if [ -z "$REPO_NAME" ] ; then
   echo Set REPO_NAME to name of the repo where the code to be accessed by github runner is stored
   EXPORTS_SET=1
@@ -57,8 +62,7 @@ export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
 # create all but alias via terraform
 # ------------- Step one tf state bucket, state locks and account alias -----------
 # needs to be false as there is no remote backend
-# TODO change plan to apply
-export ACTION=apply
+export ACTION=$ACTION
 export ENVIRONMENT="$ACCOUNT_TYPE"
 export PROJECT="$ACCOUNT_PROJECT"
 export STACK=terraform_management

@@ -12,28 +12,8 @@ resource "aws_iam_role_policy_attachment" "attach_power_user" {
   policy_arn = data.aws_iam_policy.power_user_policy.arn
 }
 
-# resource "aws_iam_role_policy" "runner_policy_1" {
-#   name = "Github_runner_policy"
-#   role = aws_iam_role.github_runner_role.id
-
-#   # Terraform's "jsonencode" function converts a
-#   # Terraform expression result to valid JSON syntax.
-#   policy = jsonencode({
-#     Version = "2012-10-17"
-#     Statement = [
-#       {
-#         Action = [
-#           "ec2:Describe*",
-#         ]
-#         Effect   = "Allow"
-#         Resource = "*"
-#       },
-#     ]
-#   })
-# }
-
 resource "aws_iam_role" "github_runner_role" {
-  name               = "GitHub_Runner"
+  name               = "uec-github-runner"
   assume_role_policy = <<EOF
     {
       "Version":"2012-10-17",
