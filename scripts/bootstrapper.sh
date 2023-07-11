@@ -1,4 +1,8 @@
 #! /bin/bash
+
+# functions
+source ./scripts/functions/terraform-functions.sh
+
 # This bootstrapper script initialises various resources necessary for Terraform and Github Actions to build
 # the DoS or CM application in an aws account
 
@@ -66,19 +70,55 @@ export ACTION=$ACTION
 export ENVIRONMENT="$ACCOUNT_TYPE"
 export PROJECT="$ACCOUNT_PROJECT"
 export STACK=terraform_management
-export USE_REMOTE_STATE_STORE=false
+
+# if remote state bucket exists use it
+if aws s3api head-bucket --bucket "$TERRAFORM_BUCKET_NAME" 2>/dev/null; then
+  export USE_REMOTE_STATE_STORE=true
+else
+  export USE_REMOTE_STATE_STORE=false
+fi
+
+# deploy stack
 /bin/bash ./scripts/infra-deploy.sh
 
-# ------------- Step three create  thumbprint for github actions -----------
-export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openid-configuration)
-export CERT_URL=$(jq -r '.jwks_uri | split("/")[2]' <<< $HOST)
-export THUMBPRINT=$(echo | openssl s_client -servername "$CERT_URL" -showcerts -connect "$CERT_URL":443 2> /dev/null | tac | sed -n '/-----END CERTIFICATE-----/,/-----BEGIN CERTIFICATE-----/p; /-----BEGIN CERTIFICATE-----/q' | tac | openssl x509 -sha1 -fingerprint -noout | sed 's/://g' | awk -F= '{print tolower($2)}')
+# having build the stack using a local backend we need to push
+# the state to the remote
+if ! $USE_REMOTE_STATE_STORE  ; then
+  # check if remote state bucket exists we are okay to migrate state to it
+  if aws s3api head-bucket --bucket "$TERRAFORM_BUCKET_NAME" 2>/dev/null; then
+    export USE_REMOTE_STATE_STORE=true
+    echo Preparing to migrate stack from local backend to remote backend
+    # the directory that holds the stack to terraform
+    STACK_DIR=$PWD/$INFRASTRUCTURE_DIR/stacks/$STACK
+    # run terraform init with migrate flag set
+    terraform-init-migrate "$STACK" "$ENVIRONMENT" "$USE_REMOTE_STATE_STORE"
+    # now push local state to remote
+    terraform state push "$STACK_DIR"/.terraform/terraform.tfstate
+  else
+    export USE_REMOTE_STATE_STORE=false
+  fi
+fi
 
-# ------------- Step four create oidc identity provider, github runner role and policies for that role -----------
-export TF_VAR_repo_name=$REPO_NAME
-export TF_VAR_oidc_provider_url="https://token.actions.githubusercontent.com"
-export TF_VAR_oidc_thumbprint=$THUMBPRINT
-export TF_VAR_oidc_client="sts.amazonaws.com"
-export STACK=github-runner
-export USE_REMOTE_STATE_STORE=true
-/bin/bash ./scripts/infra-deploy.sh
+if $USE_REMOTE_STATE_STORE  ; then
+  echo remote state bucket exists
+  # ------------- Step three create  thumbprint for github actions -----------
+  export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openid-configuration)
+  export CERT_URL=$(jq -r '.jwks_uri | split("/")[2]' <<< $HOST)
+  export THUMBPRINT=$(echo | openssl s_client -servername "$CERT_URL" -showcerts -connect "$CERT_URL":443 2> /dev/null | tac | sed -n '/-----END CERTIFICATE-----/,/-----BEGIN CERTIFICATE-----/p; /-----BEGIN CERTIFICATE-----/q' | tac | openssl x509 -sha1 -fingerprint -noout | sed 's/://g' | awk -F= '{print tolower($2)}')
+  # ------------- Step four create oidc identity provider, github runner role and policies for that role -----------
+  export TF_VAR_repo_name=$REPO_NAME
+  export TF_VAR_oidc_provider_url="https://token.actions.githubusercontent.com"
+  export TF_VAR_oidc_thumbprint=$THUMBPRINT
+  export TF_VAR_oidc_client="sts.amazonaws.com"
+  export STACK=github-runner
+  /bin/bash ./scripts/infra-deploy.sh
+else
+  echo No remote state bucket set for use with $STACK
+fi
+
+
+# # if use remote = false then
+# # recheck existence of bucket which sets use remote state to true
+# # re terraform init with migrate state flag
+# # then push local state push up to bucket
+

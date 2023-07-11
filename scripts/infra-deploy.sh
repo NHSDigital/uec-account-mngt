@@ -5,6 +5,7 @@
 # ENVIRONMENT eg dev,test
 # PROJECT eg dos or cm
 
+# clear out local state
 # functions
 source ./scripts/functions/terraform-functions.sh
 
@@ -49,11 +50,18 @@ ROOT_DIR=$PWD
 
 # the directory that holds the stack to terraform
 STACK_DIR=$PWD/$INFRASTRUCTURE_DIR/stacks/$STACK
+# remove any previous local backend for stack
+rm -rf "$STACK_DIR"/.terraform
+rm -f "$STACK_DIR"/.terraform.lock.hcl
 #  copy shared tf files to stack
 if [[ "$USE_REMOTE_STATE_STORE" =~ ^(true|yes|y|on|1|TRUE|YES|Y|ON) ]]; then
-  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/versions.tf "$STACK_DIR"
-  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/locals.tf "$STACK_DIR"
-  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/shared/provider.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/versions.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/locals.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/provider.tf "$STACK_DIR"
+else
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/versions.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/locals.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/provider.tf "$STACK_DIR"
 fi
 # switch to target stack directory ahead of tf init/plan/apply
 cd "$STACK_DIR" || exit

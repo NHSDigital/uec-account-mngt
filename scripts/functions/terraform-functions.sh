@@ -26,3 +26,19 @@ function terraform-initialise {
     fi
 }
 
+function terraform-init-migrate {
+    STACK=$1
+    ENVIRONMENT=$2
+    TERRAFORM_USE_STATE_STORE=$3
+    TERRAFORM_STATE_STORE=$PROGRAM_CODE-$ENVIRONMENT-terraform-state
+    TERRAFORM_STATE_LOCK=$PROGRAM_CODE-$ENVIRONMENT-terraform-state-lock
+    TERRAFORM_STATE_KEY=$PROGRAM_CODE-$ENVIRONMENT/$STACK/terraform.state
+
+    terraform init -migrate-state \
+        -backend-config="bucket=$TERRAFORM_STATE_STORE" \
+        -backend-config="dynamodb_table=$TERRAFORM_STATE_LOCK" \
+        -backend-config="encrypt=true" \
+        -backend-config="key=$TERRAFORM_STATE_KEY" \
+        -backend-config="region=$AWS_REGION"
+
+}
