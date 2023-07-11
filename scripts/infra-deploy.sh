@@ -92,3 +92,5 @@ fi
 rm -f "$STACK_DIR"/locals.tf
 rm -f "$STACK_DIR"/provider.tf
 rm -f "$STACK_DIR"/versions.tf
+
+echo "Completed terraform $ACTION for stack $STACK for environment $ENVIRONMENT and project $PROJECT"

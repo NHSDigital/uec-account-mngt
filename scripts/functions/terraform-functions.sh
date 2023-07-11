@@ -34,7 +34,7 @@ function terraform-init-migrate {
     TERRAFORM_STATE_LOCK=$PROGRAM_CODE-$ENVIRONMENT-terraform-state-lock
     TERRAFORM_STATE_KEY=$PROGRAM_CODE-$ENVIRONMENT/$STACK/terraform.state
 
-    terraform init -migrate-state \
+    terraform init -migrate-state -force-copy \
         -backend-config="bucket=$TERRAFORM_STATE_STORE" \
         -backend-config="dynamodb_table=$TERRAFORM_STATE_LOCK" \
         -backend-config="encrypt=true" \
