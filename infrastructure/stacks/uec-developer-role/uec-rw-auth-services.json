@@ -1,0 +1,11 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Stmt1686833731857",
+            "Action": "cognito-idp:*",
+            "Effect": "Allow",
+            "Resource": "arn:aws:cognito-idp:eu-west-2:410123189863:*:*"
+        }
+    ]
+}
