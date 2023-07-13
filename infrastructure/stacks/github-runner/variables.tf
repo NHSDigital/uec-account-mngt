@@ -7,6 +7,15 @@ variable "project_owner" {
 variable "environment" {
   description = "The environment - dev, test, staging etc"
 }
-variable "account_alias" {
-  description = "Alias for AWS account - usually equal to account name"
+variable "repo_name" {
+  description = "The name of git hub repository"
+}
+variable "oidc_provider_url" {
+  description = "Url of oidc provider"
+}
+variable "oidc_client" {
+  description = "Client of oidc provider - eg aws"
+}
+variable "oidc_thumbprint" {
+  description = "Thumbprint for oidc provider"
 }
