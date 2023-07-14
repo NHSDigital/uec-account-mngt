@@ -4,7 +4,7 @@
 source ./scripts/functions/terraform-functions.sh
 
 # This bootstrapper script initialises various resources necessary for Terraform and Github Actions to build
-# the DoS or CM application in an aws account
+# the DoS or CM application in an AWS account
 
 # Before running this bootstrapper script:
 #  - Login to an appropriate AWS account as appropriate user via commamnd-line AWS-cli
