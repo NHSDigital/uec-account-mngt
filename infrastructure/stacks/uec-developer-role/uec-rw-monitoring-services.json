@@ -1,0 +1,64 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:GetDashboard",
+                "cloudwatch:GetInsightRuleReport",
+                "firehose:*",
+                "cloudwatch:ListTagsForResource",
+                "cloudwatch:GetMetricStream",
+                "kinesis:*"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "kinesis:UpdateStreamMode",
+                "kinesis:ListStreams",
+                "kinesis:EnableEnhancedMonitoring",
+                "kinesis:UpdateShardCount",
+                "firehose:ListDeliveryStreams",
+                "kinesis:DescribeLimits",
+                "kinesis:DisableEnhancedMonitoring"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": "xray:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": "logs:*",
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:GetMetricData",
+                "cloudwatch:ListMetricStreams",
+                "cloudwatch:ListDashboards",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:GetMetricWidgetImage",
+                "cloudwatch:ListManagedInsightRules",
+                "cloudwatch:ListMetrics"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor5",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "*"
+        }
+    ]
+}
