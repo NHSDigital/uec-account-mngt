@@ -22,3 +22,41 @@ regex = '''[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'''
 # id = "AWS account"
 # description = "AWS account number  - 12 digits"
 # regex = '''[0-9]{12}'''
+
+
+[[rules]]
+description = "DynamoDB Endpoint"
+id = "dynamodb"
+regex = '''dynamodb\.[a-z]{2}[a-z-]*[1,2,3]\.amazonaws\.com'''
+
+[[rules]]
+description = "ARN Generic"
+id = "arn"
+regex = '''arn:aws:(.*):(.*):[0-9]{12}'''
+
+[[rules]]
+description = "ARN S3 "
+id = "arns3"
+regex = '''arn:aws:s3:::(.*)'''
+
+[[rules]]
+description = "ECR Endpoint"
+id = "ecr"
+regex = '''[0-9]{12}\.dkr\.ecr\.[a-z-]*-[1,2,3]\.amazonaws\.com'''
+
+
+[[rules]]
+description = "Elastic Search Endpoint"
+id = "esendpoint"
+regex = '''(.*)[a-z-]*[1,2,3]\.es\.amazonaws\.com'''
+
+
+[[rules]]
+description = "Standard Certificate"
+id = "standardcertificate"
+regex = '''-----BEGIN(\s)CERTIFICATE-----\n'''
+
+[[rules]]
+description = "Private Keys"
+id = "privatekeys"
+regex = '''\s*(\bBEGIN\b).*(PRIVATE KEY\b)\s*'''
