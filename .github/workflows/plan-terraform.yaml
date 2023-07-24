@@ -1,6 +1,9 @@
 name: Plan terraform
 
 on:
+  push:
+    branches:
+      - 'task/DR-316_Proto_type_twr'
   workflow_dispatch:
     inputs:
       environment:
