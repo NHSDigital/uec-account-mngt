@@ -4,24 +4,24 @@ on:
   push:
     branches:
       - 'task/DR-316_Proto_type_twr'
-  workflow_dispatch:
-    inputs:
-      environment:
-        type: choice
-        description: Choose the Environment
-        required: true
-        options:
-          - dev
-          - preprod
-          - prod
-          - security
-          - test
+  # workflow_dispatch:
+  #   inputs:
+  #     environment:
+  #       type: choice
+  #       description: Choose the Environment
+  #       required: true
+  #       options:
+  #         - dev
+  #         - preprod
+  #         - prod
+  #         - security
+  #         - test
 
 jobs:
   run-terraform:
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.environment }}
+      name: dev
     permissions:
       id-token: write
       contents: read
@@ -50,7 +50,7 @@ jobs:
           export ACTION=plan
           export STACK=uec-developer-role
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=${{ inputs.environment }}
+          export ACCOUNT_TYPE=dev
           /bin/bash ./scripts/infra-deploy.sh
 
 
