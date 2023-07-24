@@ -1,0 +1,56 @@
+name: Plan terraform
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: choice
+        description: Choose the Environment
+        required: true
+        options:
+          - dev
+          - preprod
+          - prod
+          - security
+          - test
+
+jobs:
+  run-terraform:
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ inputs.environment }}
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_ID }}:role/uec-github-runner
+          role-session-name: github-pipeline-session
+          aws-region: eu-west-2
+
+      - name: Initialise and Run Terraform
+        run: |
+          export ACTION=plan
+          export STACK=uec-developer-role
+          export ACCOUNT_PROJECT=dos
+          export ACCOUNT_TYPE=${{ inputs.environment }}
+          /bin/bash ./scripts/infra-deploy.sh
+
+
+
+
+
