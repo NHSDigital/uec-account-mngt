@@ -12,10 +12,10 @@ resource "aws_iam_role_policy_attachment" "attach_power_user" {
   policy_arn = data.aws_iam_policy.power_user_policy.arn
 }
 resource "aws_iam_policy" "ro_policy_iam" {
-  name        = "uec-ro-iam-services"
+  name        = "uec-github-runner-iam-services"
   description = "Read-only policies for key iam permissions required by github runner"
 
-  policy = file("uec-ro-iam-services.json")
+  policy = file("uec-github-runner-iam-services.json")
 }
 
 resource "aws_iam_role_policy_attachment" "attach_ro_iam" {

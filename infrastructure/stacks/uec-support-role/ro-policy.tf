@@ -38,3 +38,10 @@ resource "aws_iam_policy" "ro_policy_6" {
 
   policy = file("uec-ro-application-services.json")
 }
+
+resource "aws_iam_policy" "ro_policy_7" {
+  name        = "uec-ro-iam-services"
+  description = "Read-only policies for aws IAM services"
+
+  policy = file("uec-ro-iam-services.json")
+}
