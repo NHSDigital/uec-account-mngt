@@ -18,6 +18,56 @@ on:
   #         - test
 
 jobs:
+  versionExtract:
+    name: Extract Min/Max Terraform Versions
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Extract Terraform min/max versions
+        id: minMax
+        uses: clowdhaus/terraform-min-max@main
+        with:
+          directory: ./infrastructure/remote
+    outputs:
+      minVersion: ${{ steps.minMax.outputs.minVersion }}
+      maxVersion: ${{ steps.minMax.outputs.maxVersion }}
+
+  versionEvaluate:
+    name: Evaluate Min/Max Versions
+    runs-on: ubuntu-latest
+    needs: versionExtract
+    strategy:
+      matrix:
+        version:
+          - ${{ needs.versionExtract.outputs.minVersion }}
+          - ${{ needs.versionExtract.outputs.maxVersion }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_ID }}:role/uec-github-runner
+          role-session-name: github-pipeline-session
+          aws-region: eu-west-2
+
+      - name: Install Terraform v${{ matrix.version }}
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: ${{ matrix.version }}
+
+      - name: Initialize and validate v${{ matrix.version }}
+        run: |
+          export ACTION=validate
+          export STACK=uec-developer-role
+          export ACCOUNT_PROJECT=dos
+          export ACCOUNT_TYPE=dev
+          /bin/bash ./scripts/terraform-validate.sh
   run-terraform:
     runs-on: ubuntu-latest
     environment:
@@ -30,13 +80,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Install Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
+      # - name: Install Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.9'
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.1.7
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
