@@ -51,6 +51,7 @@ jobs:
           - ${{ needs.versionExtract.outputs.maxVersion }}
         stack:
           - uec-developer-role
+          - uec-support-role
 
     steps:
       - name: Checkout
