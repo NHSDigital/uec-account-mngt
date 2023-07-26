@@ -38,6 +38,11 @@ jobs:
   versionEvaluate:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
+    environment:
+      name: dev
+    permissions:
+      id-token: write
+      contents: read
     needs: versionExtract
     strategy:
       matrix:
