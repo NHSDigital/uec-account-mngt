@@ -49,6 +49,8 @@ jobs:
         version:
           - ${{ needs.versionExtract.outputs.minVersion }}
           - ${{ needs.versionExtract.outputs.maxVersion }}
+        stack:
+          - uec-developer-role
 
     steps:
       - name: Checkout
@@ -69,10 +71,11 @@ jobs:
       - name: Initialize and validate v${{ matrix.version }}
         run: |
           export ACTION=validate
-          export STACK=uec-developer-role
+          export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
           export ACCOUNT_TYPE=dev
           /bin/bash ./scripts/terraform-validate.sh
+
   run-terraform:
     runs-on: ubuntu-latest
     environment:
@@ -84,11 +87,6 @@ jobs:
 
       - name: Checkout Repository
         uses: actions/checkout@v3
-
-      # - name: Install Python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.9'
 
       - name: Install Terraform
         uses: hashicorp/setup-terraform@v2
