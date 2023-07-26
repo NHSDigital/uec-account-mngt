@@ -84,6 +84,11 @@ jobs:
     permissions:
       id-token: write
       contents: read
+    strategy:
+      matrix:
+        stack:
+          - uec-developer-role
+          - uec-support-role
     steps:
 
       - name: Checkout Repository
@@ -104,7 +109,7 @@ jobs:
       - name: Initialise and Run Terraform
         run: |
           export ACTION=plan
-          export STACK=uec-developer-role
+          export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
           export ACCOUNT_TYPE=dev
           /bin/bash ./scripts/infra-deploy.sh
