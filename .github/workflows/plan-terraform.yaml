@@ -3,7 +3,7 @@ name: Plan terraform
 on:
   workflow_call:
     inputs:
-      environment: # the parameter passed in lieu of matrix below
+      account: # the parameter passed in lieu of matrix below
         required: true
         type: string
 
@@ -45,7 +45,7 @@ jobs:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
     environment:
-      name: ${{inputs.environment}}
+      name: dev
     permissions:
       id-token: write
       contents: read
@@ -61,7 +61,7 @@ jobs:
 
     steps:
       - name: Check env
-        run: echo ${{inputs.environment}}
+        run: echo ${{inputs.account}}
       - name: Checkout
         uses: actions/checkout@v3
       - name: Configure AWS Credentials
@@ -81,13 +81,13 @@ jobs:
           export ACTION=validate
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=${{inputs.environment}}
+          export ACCOUNT_TYPE=${{inputs.account}}
           /bin/bash ./scripts/terraform-validate.sh
 
   run-terraform:
     runs-on: ubuntu-latest
     environment:
-      name: ${{inputs.environment}}
+      name: dev
     permissions:
       id-token: write
       contents: read
@@ -118,7 +118,7 @@ jobs:
           export ACTION=plan
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=${{inputs.environment}}
+          export ACCOUNT_TYPE=${{inputs.account}}
           /bin/bash ./scripts/infra-deploy.sh
 
 

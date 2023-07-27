@@ -18,13 +18,13 @@ on:
   #         - test
 
 jobs:
-  environment-matrix:
-    name: Trigger per environment
+  account-matrix:
+    name: Trigger per account
     strategy:
       fail-fast: false
       matrix:
         acc: ["dev"]
     uses: ./.github/workflows/plan-terraform.yaml
     with:
-      environment: ${{matrix.acc}}
+      account: ${{matrix.acc}}
     # secrets: inherit
