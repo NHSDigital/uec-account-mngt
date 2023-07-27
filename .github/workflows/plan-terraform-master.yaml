@@ -1,0 +1,30 @@
+name:  Master plan
+
+on:
+  push:
+    branches:
+      - 'task/DR-316_Proto_type_twr'
+  # workflow_dispatch:
+  #   inputs:
+  #     environment:
+  #       type: choice
+  #       description: Choose the Environment
+  #       required: true
+  #       options:
+  #         - dev
+  #         - preprod
+  #         - prod
+  #         - security
+  #         - test
+
+jobs:
+  environment-matrix:
+    name: Trigger per environment
+    strategy:
+      fail-fast: false
+      matrix:
+        env: [dev]
+    uses: ./.github/workflows/plan-terraform.yaml
+    with:
+      environment: ${{matrix.environment}}
+    # secrets: inherit

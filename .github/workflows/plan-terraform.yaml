@@ -1,9 +1,15 @@
 name: Plan terraform
 
 on:
-  push:
-    branches:
-      - 'task/DR-316_Proto_type_twr'
+  workflow_call:
+    inputs:
+      acc: # the parameter passed in lieu of matrix below
+        required: true
+        type: string
+
+  # push:
+  #   branches:
+  #     - 'task/DR-316_Proto_type_twr'
   # workflow_dispatch:
   #   inputs:
   #     environment:
@@ -39,7 +45,7 @@ jobs:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
     environment:
-      name: dev
+      name: ${{inputs.acc}}
     permissions:
       id-token: write
       contents: read
@@ -74,7 +80,7 @@ jobs:
           export ACTION=validate
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=dev
+          export ACCOUNT_TYPE=${{inputs.acc}}
           /bin/bash ./scripts/terraform-validate.sh
 
   run-terraform:
@@ -111,7 +117,7 @@ jobs:
           export ACTION=plan
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=dev
+          export ACCOUNT_TYPE=${{inputs.acc}}
           /bin/bash ./scripts/infra-deploy.sh
 
 
