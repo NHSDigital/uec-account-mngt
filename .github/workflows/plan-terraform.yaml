@@ -2,10 +2,10 @@ name: Plan terraform
 
 on:
   workflow_call:
-    # inputs:
-    #   acc: # the parameter passed in lieu of matrix below
-    #     required: true
-    #     type: string
+    inputs:
+      environment: # the parameter passed in lieu of matrix below
+        required: true
+        type: string
 
   # push:
   #   branches:
@@ -44,8 +44,8 @@ jobs:
   versionEvaluate:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
-    # environment:
-    #   name: ${{inputs.acc}}
+    environment:
+      name: ${{inputs.environment}}
     permissions:
       id-token: write
       contents: read
@@ -60,9 +60,10 @@ jobs:
           - uec-support-role
 
     steps:
+      - name: Check env
+        run: echo ${{inputs.environment}}
       - name: Checkout
         uses: actions/checkout@v3
-
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2.2.0
         with:
@@ -80,13 +81,13 @@ jobs:
           export ACTION=validate
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=${{inputs.acc}}
+          export ACCOUNT_TYPE=${{inputs.environment}}
           /bin/bash ./scripts/terraform-validate.sh
 
   run-terraform:
     runs-on: ubuntu-latest
-    # environment:
-    #   name: dev
+    environment:
+      name: ${{inputs.environment}}
     permissions:
       id-token: write
       contents: read
@@ -117,7 +118,7 @@ jobs:
           export ACTION=plan
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=${{inputs.acc}}
+          export ACCOUNT_TYPE=${{inputs.environment}}
           /bin/bash ./scripts/infra-deploy.sh
 
 
