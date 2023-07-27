@@ -23,8 +23,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        acc: [dev]
+        acc: ["dev"]
     uses: ./.github/workflows/plan-terraform.yaml
     with:
-      acc: ${{matrix.acc}}
+      environment: ${{matrix.acc}}
     # secrets: inherit

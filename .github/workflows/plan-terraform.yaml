@@ -2,10 +2,10 @@ name: Plan terraform
 
 on:
   workflow_call:
-    inputs:
-      acc: # the parameter passed in lieu of matrix below
-        required: true
-        type: string
+    # inputs:
+    #   acc: # the parameter passed in lieu of matrix below
+    #     required: true
+    #     type: string
 
   # push:
   #   branches:
@@ -44,8 +44,8 @@ jobs:
   versionEvaluate:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
-    environment:
-      name: ${{inputs.acc}}
+    # environment:
+    #   name: ${{inputs.acc}}
     permissions:
       id-token: write
       contents: read
@@ -85,8 +85,8 @@ jobs:
 
   run-terraform:
     runs-on: ubuntu-latest
-    environment:
-      name: dev
+    # environment:
+    #   name: dev
     permissions:
       id-token: write
       contents: read
