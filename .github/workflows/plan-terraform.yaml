@@ -45,7 +45,7 @@ jobs:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
     environment:
-      name: dev
+      name: test
     permissions:
       id-token: write
       contents: read
@@ -85,7 +85,7 @@ jobs:
   run-terraform:
     runs-on: ubuntu-latest
     environment:
-      name: dev
+      name: test
     permissions:
       id-token: write
       contents: read
