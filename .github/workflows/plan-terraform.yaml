@@ -78,8 +78,8 @@ jobs:
         run: |
           export ACTION=validate
           export STACK=${{ matrix.stack }}
-          export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=dev
+          export ACCOUNT_PROJECT=${{ env.ACCOUNT_PROJECT }}
+          export ACCOUNT_TYPE=${{ env.ACCOUNT_TYPE }}
           /bin/bash ./scripts/terraform-validate.sh
 
   run-terraform:
@@ -111,12 +111,12 @@ jobs:
           role-session-name: github-pipeline-session
           aws-region: eu-west-2
 
-      - name: Initialise and Run Terraform
+      - name: Initialise and Run Terraform Plan
         run: |
           export ACTION=plan
           export STACK=${{ matrix.stack }}
-          export ACCOUNT_PROJECT=dos
-          export ACCOUNT_TYPE=dev
+          export ACCOUNT_PROJECT=${{ env.ACCOUNT_PROJECT }}
+          export ACCOUNT_TYPE=${{ env.ACCOUNT_TYPE }}
           /bin/bash ./scripts/infra-deploy.sh
 
 
