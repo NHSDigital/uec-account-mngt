@@ -67,6 +67,6 @@ jobs:
         run: |
           export ACTION=validate
           export STACK=${{ matrix.stack }}
-          export ACCOUNT_PROJECT=${{ inputs.ACCOUNT_PROJECT }}
-          export ACCOUNT_TYPE=${{ inputs.ACCOUNT_TYPE }}
+          export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
+          export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
           /bin/bash ./scripts/terraform-validate.sh
