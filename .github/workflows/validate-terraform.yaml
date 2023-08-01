@@ -9,9 +9,6 @@ on:
       ACCOUNT_TYPE:
         required: true
         type: string
-    # secrets:
-    #   ACCOUNT_ID:
-    #     required: true
 
 jobs:
 
@@ -34,7 +31,7 @@ jobs:
   validate-against-tf-versions:
     name: Validate terraform against the min/max versions
     runs-on: ubuntu-latest
-    environment: test
+    environment: dev
     permissions:
       id-token: write
       contents: read
