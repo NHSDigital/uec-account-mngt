@@ -9,9 +9,9 @@ on:
       ACCOUNT_TYPE:
         required: true
         type: string
-    secrets:
-      ACCOUNT_ID:
-        required: true
+    # secrets:
+    #   ACCOUNT_ID:
+    #     required: true
 
 jobs:
 
