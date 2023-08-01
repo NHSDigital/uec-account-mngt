@@ -3,12 +3,12 @@ name: Apply dev terraform
 on:
   workflow_call:
     inputs:
-      ACCOUNT_PROJECT:
-        required: true
-        type: string
-      ACCOUNT_TYPE:
-        required: true
-        type: string
+      # ACCOUNT_PROJECT:
+      #   required: true
+      #   type: string
+      # ACCOUNT_TYPE:
+      #   required: true
+      #   type: string
       ENV:
         required: true
         type: string
