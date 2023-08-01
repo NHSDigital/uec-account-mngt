@@ -26,7 +26,6 @@ jobs:
       with:
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
-        ACCOUNT: dev
       secrets: inherit
     apply-terraform-dos-test:
       name: Validate terraform code dos dev
