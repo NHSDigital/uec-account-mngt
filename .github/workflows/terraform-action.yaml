@@ -11,8 +11,9 @@ on:
   #   branches:
   #     - 'task/DR-316_Proto_type_twr'
   # workflow_dispatch:
-  #   inputs:
-  #     environment:
+    inputs:
+      environment:
+        type: string
   #       type: choice
   #       description: Choose the Environment
   #       required: true
