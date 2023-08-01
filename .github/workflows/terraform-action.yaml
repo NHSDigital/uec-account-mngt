@@ -30,6 +30,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Show environment
+        run: echo ${{inputs.environment}}
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -45,8 +47,8 @@ jobs:
   versionEvaluate:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
-    # environment:
-    #   name: test
+    environment:
+      name: ${{inputs.environment}}
     permissions:
       id-token: write
       contents: read
@@ -85,8 +87,8 @@ jobs:
 
   build-dev-policies:
     runs-on: ubuntu-latest
-    # environment:
-    #   name: dev
+    environment:
+      name: ${{inputs.environment}}
     permissions:
       id-token: write
       contents: read
@@ -120,8 +122,8 @@ jobs:
 
   build-non-dev-policies:
     runs-on: ubuntu-latest
-    # environment:
-    #   name: test
+    environment:
+      name: ${{inputs.environment}}
     permissions:
       id-token: write
       contents: read
