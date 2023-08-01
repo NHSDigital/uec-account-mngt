@@ -9,14 +9,14 @@ on:
       ACCOUNT_TYPE:
         required: true
         type: string
-      # ACCOUNT:
-      #   required: true
-      #   type: string
+      ACCOUNT:
+        required: true
+        type: string
 
 jobs:
   build-dev-policies:
     runs-on: ubuntu-latest
-    environment: dev
+    environment: ${{ inputs.ACCOUNT }}
     permissions:
       id-token: write
       contents: read
