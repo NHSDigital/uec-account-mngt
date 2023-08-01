@@ -1,0 +1,55 @@
+name: Apply non-dev terraform
+
+on:
+  workflow_call:
+    inputs:
+      ACCOUNT_PROJECT:
+        required: true
+        type: string
+      ACCOUNT_TYPE:
+        required: true
+        type: string
+      ACCOUNT:
+        required: true
+        type: string
+
+jobs:
+  build-non-dev-policies:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.ACCOUNT }}
+    permissions:
+      id-token: write
+      contents: read
+    strategy:
+      matrix:
+        stack:
+          - uec-support-role
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: ${{ vars.TF_VERSION }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2.2.0
+        with:
+          role-to-assume: arn:aws:iam::${{ secrets.ACCOUNT_ID }}:role/uec-github-runner
+          role-session-name: github-pipeline-session
+          aws-region: eu-west-2
+
+      - name: Initialise and Run Terraform Plan
+        run: |
+          export ACTION=plan
+          export STACK=${{ matrix.stack }}
+          export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
+          export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
+          /bin/bash ./scripts/infra-deploy.sh
+
+
+
+
+

@@ -18,13 +18,21 @@ jobs:
       with:
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
-        ACCOUNT: prod
+        ACCOUNT: dev
       secrets: inherit
-
-
-    # deploy-to-dev:
-    #   name: Deploy to dev
-    #   uses: ./.github/workflows/terraform-action.yaml
-    #   with:
-    #     environment-name: dev
-
+    apply-terraform-dos-dev:
+      name: Validate terraform code dos dev
+      uses: ./.github/workflows/apply-terraform-dev.yaml
+      with:
+        ACCOUNT_TYPE: dev
+        ACCOUNT_PROJECT: dos
+        ACCOUNT: dev
+      secrets: inherit
+    apply-terraform-dos-test:
+      name: Validate terraform code dos dev
+      uses: ./.github/workflows/apply-terraform.yaml
+      with:
+        ACCOUNT_TYPE: test
+        ACCOUNT_PROJECT: dos
+        ACCOUNT: test
+      secrets: inherit
