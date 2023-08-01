@@ -12,23 +12,15 @@ on:
       - 'task/DR-316_Proto_type_twr'
 
 jobs:
-    # validate-terraform-dos-dev:
-    #   name: Validate terraform code dos dev
-    #   uses: ./.github/workflows/validate-terraform.yaml
-    #   with:
-    #     ACCOUNT_TYPE: dev
-    #     ACCOUNT_PROJECT: dos
-    #     ACCOUNT: dev
-    #   secrets: inherit
-
-    validate-terraform-dos-test:
-      name: Validate terraform code dos test
+    validate-terraform-dos-dev:
+      name: Validate terraform code dos dev
       uses: ./.github/workflows/validate-terraform.yaml
       with:
-        ACCOUNT_TYPE: test
+        ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
-        ACCOUNT: test
+        ACCOUNT: prod
       secrets: inherit
+
 
     # deploy-to-dev:
     #   name: Deploy to dev

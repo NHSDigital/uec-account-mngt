@@ -34,7 +34,6 @@ jobs:
   validate-against-tf-versions:
     name: Validate terraform against the min/max versions
     runs-on: ubuntu-latest
-    # environment: dev
     environment: ${{ inputs.ACCOUNT }}
     permissions:
       id-token: write
