@@ -16,7 +16,6 @@ jobs:
       name: Validate terraform code
       uses: ./.github/workflows/validate-terraform.yaml
       with:
-        environment: dev
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
       secrets: inherit
