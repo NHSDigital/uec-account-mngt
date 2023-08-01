@@ -1,0 +1,20 @@
+name: Plan terraform
+
+on:
+  # workflow_call:
+  #   inputs:
+  #     account: # the parameter passed in lieu of matrix below
+  #       required: true
+  #       type: string
+
+  push:
+    branches:
+      - 'task/DR-316_Proto_type_twr'
+
+jobs:
+    deploy-to-dev:
+      name: Deploy to dev
+      uses: ./.github/workflows/terraform-action.yaml
+      with:
+        environment: dev
+

@@ -1,15 +1,15 @@
 name: Plan terraform
 
 on:
-  # workflow_call:
+  workflow_call:
   #   inputs:
   #     account: # the parameter passed in lieu of matrix below
   #       required: true
   #       type: string
 
-  push:
-    branches:
-      - 'task/DR-316_Proto_type_twr-nosuch'
+  # push:
+  #   branches:
+  #     - 'task/DR-316_Proto_type_twr'
   # workflow_dispatch:
   #   inputs:
   #     environment:
@@ -44,8 +44,8 @@ jobs:
   versionEvaluate:
     name: Evaluate Min/Max Versions
     runs-on: ubuntu-latest
-    environment:
-      name: test
+    # environment:
+    #   name: test
     permissions:
       id-token: write
       contents: read
@@ -84,8 +84,8 @@ jobs:
 
   build-dev-policies:
     runs-on: ubuntu-latest
-    environment:
-      name: dev
+    # environment:
+    #   name: dev
     permissions:
       id-token: write
       contents: read
@@ -119,8 +119,8 @@ jobs:
 
   build-non-dev-policies:
     runs-on: ubuntu-latest
-    environment:
-      name: test
+    # environment:
+    #   name: test
     permissions:
       id-token: write
       contents: read
