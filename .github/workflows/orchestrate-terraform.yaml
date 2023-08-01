@@ -18,7 +18,7 @@ jobs:
       with:
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
-        secrets: inherit
+      secrets: inherit
 
     # deploy-to-dev:
     #   name: Deploy to dev
