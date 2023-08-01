@@ -9,7 +9,7 @@ on:
       ACCOUNT_TYPE:
         required: true
         type: string
-      ACCOUNT:
+      ENV:
         required: true
         type: string
 
@@ -34,7 +34,7 @@ jobs:
   validate-against-tf-versions:
     name: Validate terraform against the min/max versions
     runs-on: ubuntu-latest
-    environment: ${{ inputs.ACCOUNT }}
+    environment: ${{ inputs.ENV }}
     permissions:
       id-token: write
       contents: read
