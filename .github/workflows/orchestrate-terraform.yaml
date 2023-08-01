@@ -16,9 +16,9 @@ jobs:
       name: Validate terraform code dos dev
       uses: ./.github/workflows/validate-terraform.yaml
       with:
-        ACCOUNT_TYPE: dev
+        ACCOUNT_TYPE: test
         ACCOUNT_PROJECT: dos
-        ACCOUNT: dev
+        ACCOUNT: test
       secrets: inherit
 
     validate-terraform-dos-test:
