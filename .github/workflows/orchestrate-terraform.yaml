@@ -13,7 +13,7 @@ jobs:
       with:
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
-        ACCOUNT: dos-dev
+        ENV: dos-dev
       secrets: inherit
     apply-terraform-dos-dev:
       name: Build read-write iam policies for dos dev account
@@ -21,7 +21,7 @@ jobs:
       with:
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: dos
-        ACCOUNT: dos-dev
+        ENV: dos-dev
       secrets: inherit
     apply-terraform-dos-test:
       name: Build read-write and read-only iam policies for dos test account
@@ -29,7 +29,7 @@ jobs:
       with:
         ACCOUNT_TYPE: test
         ACCOUNT_PROJECT: dos
-        ACCOUNT: dos-test
+        ENV: dos-test
       secrets: inherit
     # TODO add other dos related accounts as required
     apply-terraform-cm-dev:
@@ -38,7 +38,7 @@ jobs:
       with:
         ACCOUNT_TYPE: dev
         ACCOUNT_PROJECT: cm
-        ACCOUNT: cm-dev
+        ENV: cm-dev
       secrets: inherit
     apply-terraform-cm-test:
       name: Build read-write and read-only iam policies for cm test account
@@ -46,6 +46,6 @@ jobs:
       with:
         ACCOUNT_TYPE: test
         ACCOUNT_PROJECT: dos
-        ACCOUNT: cm-test
+        ENV: cm-test
       secrets: inherit
     # TODO add other cm related accounts as required
