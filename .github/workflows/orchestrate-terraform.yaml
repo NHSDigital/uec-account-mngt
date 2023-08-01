@@ -1,4 +1,4 @@
-name: Plan terraform
+name: Orchestrate terraform workflow
 
 on:
   # workflow_call:
@@ -12,9 +12,17 @@ on:
       - 'task/DR-316_Proto_type_twr'
 
 jobs:
-    deploy-to-dev:
-      name: Deploy to dev
-      uses: ./.github/workflows/terraform-action.yaml
+    validate-terraform:
+      name: Validate terraform code
+      uses: ./.github/workflows/validate-terraform.yaml
       with:
-        environment: dev
+        ACCOUNT_TYPE: dev
+        ACCOUNT_PROJECT: dos
+        secrets: inherit
+
+    # deploy-to-dev:
+    #   name: Deploy to dev
+    #   uses: ./.github/workflows/terraform-action.yaml
+    #   with:
+    #     environment-name: dev
 
