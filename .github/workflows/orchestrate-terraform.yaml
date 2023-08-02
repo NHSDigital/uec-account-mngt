@@ -3,7 +3,7 @@ name: Orchestrate terraform workflow
 on:
   push:
     branches:
-      - 'task/DR-316_Proto_type_twr'
+      - 'main'
 
 jobs:
   # only need to validate tf code once only once

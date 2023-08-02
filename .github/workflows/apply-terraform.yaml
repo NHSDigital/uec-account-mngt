@@ -37,7 +37,7 @@ jobs:
 
       - name: Initialise and Run Terraform Plan
         run: |
-          export ACTION=plan
+          export ACTION=apply
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
           export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
@@ -72,7 +72,7 @@ jobs:
 
       - name: Initialise and Run Terraform Plan
         run: |
-          export ACTION=plan
+          export ACTION=apply
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
           export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
