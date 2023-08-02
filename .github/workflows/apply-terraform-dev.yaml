@@ -3,18 +3,13 @@ name: Apply dev terraform
 on:
   workflow_call:
     inputs:
-      # ACCOUNT_PROJECT:
-      #   required: true
-      #   type: string
-      # ACCOUNT_TYPE:
-      #   required: true
-      #   type: string
       ENV:
         required: true
         type: string
 
 jobs:
   build-dev-policies:
+    if:  ${{ vars.ACCOUNT_TYPE }} == 'dev'
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENV }}
     permissions:
@@ -24,7 +19,6 @@ jobs:
       matrix:
         stack:
           - uec-developer-role
-          - uec-support-role
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
