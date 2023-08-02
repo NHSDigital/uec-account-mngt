@@ -63,4 +63,4 @@ jobs:
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
           export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
-          /bin/bash ./scripts/terraform-validate.sh
+          /bin/bash ./scripts/infra-deploy.sh
