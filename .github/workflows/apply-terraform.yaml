@@ -9,7 +9,8 @@ on:
 
 jobs:
   build-dev-policies:
-    if:  ${{vars.ACCOUNT_TYPE == 'dev'}}
+    # if:  ${{inputs.ENV == 'dev'}}
+    if: contains(inputs.ENV,'dev')
     runs-on: ubuntu-latest
     environment: ${{ inputs.ENV }}
     permissions:
