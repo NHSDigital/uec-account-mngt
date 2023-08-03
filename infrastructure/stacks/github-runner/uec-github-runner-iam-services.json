@@ -9,7 +9,9 @@
                 "iam:Get*",
                 "iam:List*",
                 "iam:SimulateCustomPolicy",
-                "iam:SimulatePrincipalPolicy"
+                "iam:SimulatePrincipalPolicy",
+                "iam:CreatePolicy",
+                "iam:TagPolicy"
             ],
             "Resource": "*"
         }
