@@ -35,7 +35,7 @@ jobs:
           role-session-name: github-pipeline-session
           aws-region: eu-west-2
 
-      - name: Initialise and Run Terraform Plan
+      - name: Initialise and Run Terraform Apply
         run: |
           export ACTION=apply
           export STACK=${{ matrix.stack }}
@@ -70,7 +70,7 @@ jobs:
           role-session-name: github-pipeline-session
           aws-region: eu-west-2
 
-      - name: Initialise and Run Terraform Plan
+      - name: Initialise and Run Terraform Apply
         run: |
           export ACTION=apply
           export STACK=${{ matrix.stack }}
