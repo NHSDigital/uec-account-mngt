@@ -10,8 +10,8 @@
                 "iam:List*",
                 "iam:SimulateCustomPolicy",
                 "iam:SimulatePrincipalPolicy",
-                "iam.CreatePolicy",
-                "iam.TagPolicy"
+                "iam:CreatePolicy",
+                "iam:TagPolicy"
             ],
             "Resource": "*"
         }
