@@ -5,7 +5,8 @@
 # ACCOUNT_TYPE eg dev,test
 # ACCOUNT_PROJECT eg dos or cm
 
-# clear out local state
+# fail on first error
+set -e
 # functions
 source ./scripts/functions/terraform-functions.sh
 
