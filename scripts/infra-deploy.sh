@@ -6,7 +6,7 @@
 # ACCOUNT_PROJECT eg dos or cm
 
 # fail on first error
-set -e
+# set -e
 # functions
 source ./scripts/functions/terraform-functions.sh
 
