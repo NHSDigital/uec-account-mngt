@@ -53,6 +53,7 @@ if [ $EXPORTS_SET = 1 ] ; then
   echo One or more exports not set
   exit 1
 fi
+export TERRAFORM_BUCKET_NAME="nhse-$ACCOUNT_TYPE-$REPO_NAME-terraform-state"  # globally unique name
 
 COMMON_TF_VARS_FILE="common.tfvars"
 PROJECT_TF_VARS_FILE="$ACCOUNT_PROJECT-project.tfvars"
