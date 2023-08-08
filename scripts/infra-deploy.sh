@@ -15,6 +15,7 @@ export STACK="${STACK:-""}"                 # The terraform stack to be actioned
 export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"     # The type of account being used - dev test
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"             # dos or cm
 export USE_REMOTE_STATE_STORE="${USE_REMOTE_STATE_STORE:-true}"
+export REPO_NAME="${REPO_NAME:-"uec-account-mngt"}"
 # check exports have been done
 EXPORTS_SET=0
 # Check key variables have been exported - see above
@@ -76,7 +77,7 @@ fi
 # switch to target stack directory ahead of tf init/plan/apply
 cd "$STACK_DIR" || exit
 # init terraform
-terraform-initialise "$STACK" "$ACCOUNT_TYPE" "$USE_REMOTE_STATE_STORE"
+terraform-initialise "$STACK" "$USE_REMOTE_STATE_STORE"
 # plan
 if [ -n "$ACTION" ] && [ "$ACTION" = 'plan' ] ; then
   terraform plan \

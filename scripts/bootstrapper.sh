@@ -11,11 +11,13 @@ source ./scripts/functions/terraform-functions.sh
 #  - Export the following variables appropriate for your account and github setup prior to calling this script
 #  - They are NOT set in this script to avoid details being stored in repo
 export ACTION="${ACTION:-"plan"}"                 # default action is plan
-export REPO_NAME="${REPO_NAME:-""}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
+export REPO_NAME="${REPO_NAME:-"uec-account-mngt"}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
 export AWS_REGION="${AWS_REGION:-""}"                             # The AWS region into which you intend to deploy the application (where the terraform bucket will be created) eg eu-west-2
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"                        # Identify the application to be hosted in the account eg dos or cm - used to built terraform bucket name
 export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"                    # Identify the purpose of the account/environment (one of dev,test,security,preprod or prod) usually part of the account name
 
+# Github org
+GITHUB_ORG="NHSDigital"
 # check exports have been done
 EXPORTS_SET=0
 # Check key variables have been exported - see above
@@ -60,9 +62,10 @@ if [ $EXPORTS_SET = 1 ] ; then
 fi
 
 # derive and set the name of the bucket and the alias
-export TERRAFORM_BUCKET_NAME="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE-terraform-state"    # A globally unique name for your terraform remote state bucket
 export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
-
+export TERRAFORM_BUCKET_NAME="nhse-$ACCOUNT_TYPE-$REPO_NAME-terraform-state"  # globally unique name
+export TF_VAR_terraform_lock_table_name="nhse-$ACCOUNT_TYPE-$REPO_NAME-terraform-state-lock"
+export TF_VAR_terraform_state_bucket_name=$TERRAFORM_BUCKET_NAME
 # create all but alias via terraform
 # ------------- Step one tf state bucket, state locks and account alias -----------
 export ACTION=$ACTION
@@ -93,7 +96,7 @@ if ! $USE_REMOTE_STATE_STORE  ; then
     cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/locals.tf "$STACK_DIR"
     cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/provider.tf "$STACK_DIR"
     # run terraform init with migrate flag set
-    terraform-init-migrate "$STACK" "$ENVIRONMENT" "$USE_REMOTE_STATE_STORE"
+    terraform-init-migrate "$STACK" "$USE_REMOTE_STATE_STORE"
     # now push local state to remote
     terraform state push "$STACK_DIR"/terraform.tfstate
     rm -f "$STACK_DIR"/locals.tf
@@ -112,7 +115,7 @@ export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openi
 export CERT_URL=$(jq -r '.jwks_uri | split("/")[2]' <<< $HOST)
 export THUMBPRINT=$(echo | openssl s_client -servername "$CERT_URL" -showcerts -connect "$CERT_URL":443 2> /dev/null | tac | sed -n '/-----END CERTIFICATE-----/,/-----BEGIN CERTIFICATE-----/p; /-----BEGIN CERTIFICATE-----/q' | tac | openssl x509 -sha1 -fingerprint -noout | sed 's/://g' | awk -F= '{print tolower($2)}')
 # ------------- Step four create oidc identity provider, github runner role and policies for that role -----------
-export TF_VAR_repo_name=$REPO_NAME
+export TF_VAR_repo_name="$GITHUB_ORG/$REPO_NAME"
 export TF_VAR_oidc_provider_url="https://token.actions.githubusercontent.com"
 export TF_VAR_oidc_thumbprint=$THUMBPRINT
 export TF_VAR_oidc_client="sts.amazonaws.com"
