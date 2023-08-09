@@ -1,6 +1,6 @@
 module "terraform_lock_dynamodb" {
   source     = "../../modules/dynamodb"
-  table_name = "${var.account_alias}-terraform-state-lock"
+  table_name = var.terraform_lock_table_name
 
   hash_key = "LockID"
   attributes = [{
