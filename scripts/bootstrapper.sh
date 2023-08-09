@@ -8,7 +8,6 @@
 #  - Export the following variables appropriate for your account and github setup prior to calling this script
 #  - They are NOT set in this script to avoid details being stored in repo
 export ACTION="${ACTION:-"plan"}"                 # default action is plan
-# export REPO_NAME="${REPO_NAME:-"uec-account-mngt"}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
 export AWS_REGION="${AWS_REGION:-""}"                             # The AWS region into which you intend to deploy the application (where the terraform bucket will be created) eg eu-west-2
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"                        # Identify the application to be hosted in the account eg dos or cm - used to built terraform bucket name
 export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"                    # Identify the purpose of the account/environment (one of dev,test,security,preprod or prod) usually part of the account name
@@ -26,11 +25,6 @@ if [[ ! "$ACTION" =~ ^(plan|apply|destroy) ]]; then
     echo ACTION must be one of following terraform actions - plan, apply or destroy
     EXPORTS_SET=1
 fi
-
-# if [ -z "$REPO_NAME" ] ; then
-#   echo Set REPO_NAME to name of the repo where the code to be accessed by github runner is stored
-#   EXPORTS_SET=1
-# fi
 
 if [ -z "$AWS_REGION" ] ; then
   echo Set AWS_REGION to name of the AWS region to host the terraform state bucket

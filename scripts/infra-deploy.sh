@@ -7,15 +7,12 @@
 
 # fail on first error
 set -e
-# # functions
-# source ./scripts/functions/terraform-functions.sh
 
 export ACTION="${ACTION:-""}"               # The terraform action to execute
 export STACK="${STACK:-""}"                 # The terraform stack to be actioned
 export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"     # The type of account being used - dev test
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"             # dos or cm
 export USE_REMOTE_STATE_STORE="${USE_REMOTE_STATE_STORE:-true}"
-# export REPO_NAME="${REPO_NAME:-"uec-account-mngt"}"
 
 # functions
 source ./scripts/project-common.sh
@@ -58,7 +55,6 @@ if [ $EXPORTS_SET = 1 ] ; then
   echo One or more exports not set
   exit 1
 fi
-# export TERRAFORM_BUCKET_NAME="nhse-$ACCOUNT_TYPE-$REPO_NAME-terraform-state"  # globally unique name
 
 COMMON_TF_VARS_FILE="common.tfvars"
 PROJECT_TF_VARS_FILE="$ACCOUNT_PROJECT-project.tfvars"
