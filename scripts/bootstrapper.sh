@@ -1,8 +1,5 @@
 #! /bin/bash
 
-# functions
-source ./scripts/functions/terraform-functions.sh
-
 # This bootstrapper script initialises various resources necessary for Terraform and Github Actions to build
 # the DoS or CM application in an AWS account
 
@@ -11,10 +8,14 @@ source ./scripts/functions/terraform-functions.sh
 #  - Export the following variables appropriate for your account and github setup prior to calling this script
 #  - They are NOT set in this script to avoid details being stored in repo
 export ACTION="${ACTION:-"plan"}"                 # default action is plan
-export REPO_NAME="${REPO_NAME:-"uec-account-mngt"}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
+# export REPO_NAME="${REPO_NAME:-"uec-account-mngt"}"               # The repository name where your code is stored eg NHSDigital/uec-account-mngt
 export AWS_REGION="${AWS_REGION:-""}"                             # The AWS region into which you intend to deploy the application (where the terraform bucket will be created) eg eu-west-2
 export ACCOUNT_PROJECT="${ACCOUNT_PROJECT:-""}"                        # Identify the application to be hosted in the account eg dos or cm - used to built terraform bucket name
 export ACCOUNT_TYPE="${ACCOUNT_TYPE:-""}"                    # Identify the purpose of the account/environment (one of dev,test,security,preprod or prod) usually part of the account name
+
+# functions
+source ./scripts/project-common.sh
+source ./scripts/functions/terraform-functions.sh
 
 # Github org
 GITHUB_ORG="NHSDigital"
@@ -26,10 +27,10 @@ if [[ ! "$ACTION" =~ ^(plan|apply|destroy) ]]; then
     EXPORTS_SET=1
 fi
 
-if [ -z "$REPO_NAME" ] ; then
-  echo Set REPO_NAME to name of the repo where the code to be accessed by github runner is stored
-  EXPORTS_SET=1
-fi
+# if [ -z "$REPO_NAME" ] ; then
+#   echo Set REPO_NAME to name of the repo where the code to be accessed by github runner is stored
+#   EXPORTS_SET=1
+# fi
 
 if [ -z "$AWS_REGION" ] ; then
   echo Set AWS_REGION to name of the AWS region to host the terraform state bucket
@@ -63,9 +64,8 @@ fi
 
 # derive and set the name of the bucket and the alias
 export TF_VAR_account_alias="nhse-uec-$ACCOUNT_PROJECT-$ACCOUNT_TYPE"
-export TERRAFORM_BUCKET_NAME="nhse-$ACCOUNT_TYPE-$REPO_NAME-terraform-state"  # globally unique name
-export TF_VAR_terraform_lock_table_name="nhse-$ACCOUNT_TYPE-$REPO_NAME-terraform-state-lock"
 export TF_VAR_terraform_state_bucket_name=$TERRAFORM_BUCKET_NAME
+export TF_VAR_terraform_lock_table_name=$TERRAFORM_LOCK_TABLE
 # create all but alias via terraform
 # ------------- Step one tf state bucket, state locks and account alias -----------
 export ACTION=$ACTION

@@ -1,3 +1,3 @@
 #! /bin/bash
 
-ENVIRONMENT=dev
+# ENVIRONMENT=dev
