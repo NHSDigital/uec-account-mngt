@@ -81,6 +81,13 @@ else
 fi
 # switch to target stack directory ahead of tf init/plan/apply
 cd "$STACK_DIR" || exit
+# if no stack tfvars create temporary one
+TEMP_STACK_TF_VARS_FILE=0
+if [ ! -f "$ROOT_DIR/$INFRASTRUCTURE_DIR/$STACK_TF_VARS_FILE" ] ; then
+  touch "$ROOT_DIR/$INFRASTRUCTURE_DIR/$STACK_TF_VARS_FILE"
+  TEMP_STACK_TF_VARS_FILE=1
+fi
+#
 # init terraform
 terraform-initialise "$STACK" "$USE_REMOTE_STATE_STORE"
 # plan
@@ -115,5 +122,9 @@ rm -f "$STACK_DIR"/locals.tf
 rm -f "$STACK_DIR"/provider.tf
 rm -f "$STACK_DIR"/versions.tf
 rm -f "$STACK_DIR"/common-variables.tf
+
+if [ $TEMP_STACK_TF_VARS_FILE = 1 ] ; then
+  rm -f "$ROOT_DIR/$INFRASTRUCTURE_DIR/$STACK_TF_VARS_FILE"
+fi
 
 echo "Completed terraform $ACTION for stack $STACK for account type $ACCOUNT_TYPE and project $ACCOUNT_PROJECT"
