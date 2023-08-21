@@ -72,10 +72,12 @@ if [[ "$USE_REMOTE_STATE_STORE" =~ ^(true|yes|y|on|1|TRUE|YES|Y|ON) ]]; then
   cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/versions.tf "$STACK_DIR"
   cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/locals.tf "$STACK_DIR"
   cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/provider.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/remote/common-variables.tf "$STACK_DIR"
 else
   cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/versions.tf "$STACK_DIR"
   cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/locals.tf "$STACK_DIR"
   cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/provider.tf "$STACK_DIR"
+  cp "$ROOT_DIR"/"$INFRASTRUCTURE_DIR"/local/common-variables.tf "$STACK_DIR"
 fi
 # switch to target stack directory ahead of tf init/plan/apply
 cd "$STACK_DIR" || exit
@@ -112,5 +114,6 @@ fi
 rm -f "$STACK_DIR"/locals.tf
 rm -f "$STACK_DIR"/provider.tf
 rm -f "$STACK_DIR"/versions.tf
+rm -f "$STACK_DIR"/common-variables.tf
 
 echo "Completed terraform $ACTION for stack $STACK for account type $ACCOUNT_TYPE and project $ACCOUNT_PROJECT"
