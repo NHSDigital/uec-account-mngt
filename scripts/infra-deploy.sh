@@ -57,6 +57,7 @@ if [ $EXPORTS_SET = 1 ] ; then
 fi
 
 COMMON_TF_VARS_FILE="common.tfvars"
+STACK_TF_VARS_FILE="$STACK.tfvars"
 PROJECT_TF_VARS_FILE="$ACCOUNT_PROJECT-project.tfvars"
 ENV_TF_VARS_FILE="$ACCOUNT_TYPE.tfvars"
 echo "Preparing to run terraform $ACTION for stack $STACK for account type $ACCOUNT_TYPE and project $ACCOUNT_PROJECT"
@@ -84,6 +85,7 @@ terraform-initialise "$STACK" "$USE_REMOTE_STATE_STORE"
 if [ -n "$ACTION" ] && [ "$ACTION" = 'plan' ] ; then
   terraform plan \
   -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$COMMON_TF_VARS_FILE \
+  -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$STACK_TF_VARS_FILE \
   -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$PROJECT_TF_VARS_FILE \
   -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
@@ -91,6 +93,7 @@ fi
 if [ -n "$ACTION" ] && [ "$ACTION" = 'apply' ] ; then
   terraform apply -auto-approve \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$COMMON_TF_VARS_FILE \
+    -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$STACK_TF_VARS_FILE \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$PROJECT_TF_VARS_FILE \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
@@ -98,6 +101,7 @@ fi
 if [ -n "$ACTION" ] && [ "$ACTION" = 'destroy' ] ; then
   terraform destroy -auto-approve\
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$COMMON_TF_VARS_FILE \
+    -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$STACK_TF_VARS_FILE \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$PROJECT_TF_VARS_FILE \
     -var-file $ROOT_DIR/$INFRASTRUCTURE_DIR/$ENV_TF_VARS_FILE
 fi
