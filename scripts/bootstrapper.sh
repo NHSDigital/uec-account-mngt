@@ -17,7 +17,7 @@ source ./scripts/project-common.sh
 source ./scripts/functions/terraform-functions.sh
 
 # Github org
-GITHUB_ORG="NHSDigital"
+export TF_VAR_github_org="NHSDigital"
 # check exports have been done
 EXPORTS_SET=0
 # Check key variables have been exported - see above
@@ -109,7 +109,6 @@ export HOST=$(curl https://token.actions.githubusercontent.com/.well-known/openi
 export CERT_URL=$(jq -r '.jwks_uri | split("/")[2]' <<< $HOST)
 export THUMBPRINT=$(echo | openssl s_client -servername "$CERT_URL" -showcerts -connect "$CERT_URL":443 2> /dev/null | tac | sed -n '/-----END CERTIFICATE-----/,/-----BEGIN CERTIFICATE-----/p; /-----BEGIN CERTIFICATE-----/q' | tac | openssl x509 -sha1 -fingerprint -noout | sed 's/://g' | awk -F= '{print tolower($2)}')
 # ------------- Step four create oidc identity provider, github runner role and policies for that role -----------
-export TF_VAR_repo_name="$GITHUB_ORG/$REPO_NAME"
 export TF_VAR_oidc_provider_url="https://token.actions.githubusercontent.com"
 export TF_VAR_oidc_thumbprint=$THUMBPRINT
 export TF_VAR_oidc_client="sts.amazonaws.com"

@@ -38,3 +38,9 @@ resource "aws_iam_policy" "dev_policy_6" {
 
   policy = file("uec-rw-application-services.json")
 }
+resource "aws_iam_policy" "dev_policy_7" {
+  name        = "uec-rw-iam-services"
+  description = "Read-write policies for aws iam services used by application"
+
+  policy = file("uec-rw-iam-services.json")
+}
