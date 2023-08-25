@@ -8,26 +8,26 @@ on:
 jobs:
     re-run-bootstrap-dos-dev:
       name: Re-run bootstrap for dos dev account
-      uses: ./.github/workflows/re-run-bootstrap.yaml
+      uses: ./.github/workflows/rerun-bootstrap.yaml
       with:
         ENV: dos-dev
       secrets: inherit
     re-run-bootstrap-dos-test:
       name: Re-run bootstrap for dos test account
-      uses: ./.github/workflows/re-run-bootstrap.yaml
+      uses: ./.github/workflows/rerun-bootstrap.yaml
       with:
         ENV: dos-test
       secrets: inherit
     # TODO add other dos related accounts as required
     re-run-bootstrap-cm-dev:
       name: Re-run bootstrap for cm dev account
-      uses: ./.github/workflows/re-run-bootstrap.yaml
+      uses: ./.github/workflows/rerun-bootstrap.yaml
       with:
         ENV: cm-dev
       secrets: inherit
     re-run-bootstrap-cm-test:
       name: Re-run bootstrap for cm test account
-      uses: ./.github/workflows/re-run-bootstrap.yaml
+      uses: ./.github/workflows/rerun-bootstrap.yaml
       with:
         ENV: cm-test
       secrets: inherit
