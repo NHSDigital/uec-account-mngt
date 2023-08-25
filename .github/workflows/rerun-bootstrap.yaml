@@ -1,9 +1,6 @@
 name: Run bootstrapper
 
 on:
-  push:
-    branches:
-      - 'task/DR-999_Add_bootstrap_action'
   workflow_call:
     inputs:
       ENV:
@@ -13,7 +10,7 @@ on:
 jobs:
   run-bootstrap:
     runs-on: ubuntu-latest
-    environment: dos-dev
+    environment: ${{ inputs.ENV }}
     permissions:
       id-token: write
       contents: read
