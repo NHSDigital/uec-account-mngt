@@ -32,7 +32,7 @@ jobs:
 
       - name: Run bootstrapper
         run: |
-          export ACTION=plan
+          export ACTION=apply
           export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
           export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
           /bin/bash ./scripts/bootstrapper.sh
