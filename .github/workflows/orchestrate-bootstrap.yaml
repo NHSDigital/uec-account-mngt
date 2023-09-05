@@ -3,7 +3,7 @@ name: Orchestrate bootstrapper workflow
 on:
   push:
     branches:
-      - 'main'
+      - 'task/DR-369_Boot_strap_action'
 
 jobs:
     re-run-bootstrap-dos-dev:
