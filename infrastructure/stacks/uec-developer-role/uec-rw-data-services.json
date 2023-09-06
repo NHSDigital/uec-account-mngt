@@ -28,6 +28,7 @@
                 "redshift:DescribeEvents",
                 "redshift-serverless:ListWorkgroups",
                 "redshift:CreateSavedQuery",
+                "backup:*",
                 "redshift-serverless:DeleteResourcePolicy",
                 "redshift:DescribeDefaultClusterParameters",
                 "redshift:DeleteScheduledAction",
