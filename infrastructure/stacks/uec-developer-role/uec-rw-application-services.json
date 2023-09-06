@@ -70,6 +70,12 @@
             "Effect": "Allow",
             "Action": "events:*",
             "Resource": "*"
+        },
+        {
+          "Sid": "VisualEditor10",
+          "Effect": "Allow",
+          "Action": "cloudshell:*",
+          "Resource": "*"
         }
     ]
 }
