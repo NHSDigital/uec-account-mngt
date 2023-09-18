@@ -101,7 +101,12 @@
                 "osis:ListPipelineBlueprints",
                 "osis:ListPipelines",
                 "osis:ListTagsForResource",
-                "osis:ValidatePipeline"
+                "osis:ValidatePipeline",
+                "athena:StartQueryExecution",
+                "athena:GetQueryResults",
+                "athena:GetWorkGroup",
+                "athena:StopQueryExecution",
+                "athena:GetQueryExecution"
             ],
             "Resource": "*"
         }
