@@ -3,7 +3,7 @@ name: Orchestrate terraform workflow
 on:
   push:
     branches:
-      - 'main'
+      - 'task/DR-406_Add_support_tools'
 
 jobs:
     apply-terraform-dos-dev:
