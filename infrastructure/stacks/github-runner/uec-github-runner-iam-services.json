@@ -22,7 +22,9 @@
               "iam:SimulateCustomPolicy",
               "iam:CreatePolicyVersion",
               "iam:DeletePolicyVersion",
-              "iam:TagOpenIDConnectProvider"
+              "iam:TagOpenIDConnectProvider",
+              "iam:DeleteRolePolicy",
+              "iam:PutRolePolicy"
           ],
           "Resource": "*"
       }
