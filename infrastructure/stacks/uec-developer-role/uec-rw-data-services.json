@@ -38,6 +38,19 @@
             "Effect": "Allow",
             "Action": "dynamodb:*",
             "Resource": "*"
-        }
+        },
+        {
+          "Sid": "VisualEditor5",
+          "Effect": "Allow",
+          "Action": [
+              "athena:StartQueryExecution",
+              "athena:GetQueryResults",
+              "athena:GetWorkGroup",
+              "athena:StopQueryExecution",
+              "athena:GetQueryExecution"
+          ],
+          "Resource": "*"
+      }
+
     ]
 }

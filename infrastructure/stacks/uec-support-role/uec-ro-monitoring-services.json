@@ -141,6 +141,15 @@
                 "s3:ListStorageLensConfigurations"
             ],
             "Resource": "*"
-        }
+        },
+        {
+          "Sid": "VisualEditor1",
+          "Effect": "Allow",
+          "Action": [
+              "s3:PutObject",
+              "s3:AbortMultipartUpload"
+          ],
+          "Resource": "*athena*/*"
+      }
     ]
 }
