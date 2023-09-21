@@ -53,6 +53,7 @@ jobs:
       matrix:
         stack:
           - uec-support-role
+          - support-tools
     steps:
 
       - name: Checkout Repository
@@ -76,9 +77,8 @@ jobs:
           export STACK=${{ matrix.stack }}
           export ACCOUNT_PROJECT=${{ vars.ACCOUNT_PROJECT }}
           export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
+          export TF_VAR_aws_serverless_applications_repo_url=${{ vars.AWS_SERVERLESS_APPLICATIONS_REPO_URL }}
           /bin/bash ./scripts/infra-deploy.sh
-
-
 
 
 

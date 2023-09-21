@@ -19,3 +19,8 @@ variable "target_access_logging_prefix" {
   description = "A prefix for all log object keys"
   default     = null
 }
+
+variable "force_destroy" {
+  description = "When true will destroy the S3 bucket even when not empty"
+  default     = false
+}

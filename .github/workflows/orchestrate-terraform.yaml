@@ -7,26 +7,26 @@ on:
 
 jobs:
     apply-terraform-dos-dev:
-      name: Build read-write iam policies for dos dev account
+      name: Build account level resources for dos dev account
       uses: ./.github/workflows/apply-terraform.yaml
       with:
         ENV: dos-dev
       secrets: inherit
     apply-terraform-dos-test:
-      name: Build read-write and read-only iam policies for dos test account
+      name: Build account level resources for dos test account
       uses: ./.github/workflows/apply-terraform.yaml
       with:
         ENV: dos-test
       secrets: inherit
     # TODO add other dos related accounts as required
     apply-terraform-cm-dev:
-      name: Build read-write iam policies for cm dev account
+      name: Build account level resources for cm dev account
       uses: ./.github/workflows/apply-terraform.yaml
       with:
         ENV: cm-dev
       secrets: inherit
     apply-terraform-cm-test:
-      name: Build read-write and read-only iam policies for cm test account
+      name: Build account level resources for cm test account
       uses: ./.github/workflows/apply-terraform.yaml
       with:
         ENV: cm-test
