@@ -22,12 +22,6 @@ description = "ARN Generic"
 id = "arn"
 regex = '''arn:aws:(.*):(.*):[0-9]{12}'''
 
-# What value does this add ?
-#[[rules]]
-#description = "ARN S3 "
-#id = "arns3"
-#regex = '''arn:aws:s3:::(.*)'''
-
 [[rules]]
 description = "ECR Endpoints"
 id = "ecr"
