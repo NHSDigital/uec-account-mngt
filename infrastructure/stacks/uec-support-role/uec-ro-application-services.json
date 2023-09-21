@@ -114,7 +114,7 @@
             "Resource": "*"
         },
         {
-          "Sid": "VisualEditor0",
+          "Sid": "VisualEditor1",
           "Effect": "Allow",
           "Action": ["lambda:InvokeFunction"],
           "Resource": "arn:aws:lambda:*:*:function:*athena*"
