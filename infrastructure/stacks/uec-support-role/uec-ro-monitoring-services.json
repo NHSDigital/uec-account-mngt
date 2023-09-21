@@ -149,7 +149,7 @@
               "s3:PutObject",
               "s3:AbortMultipartUpload"
           ],
-          "Resource": "*athena*/*"
+          "Resource": "arn:aws:s3:::*athena*/*"
       }
     ]
 }
