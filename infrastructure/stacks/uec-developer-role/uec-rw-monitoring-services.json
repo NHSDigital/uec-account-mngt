@@ -61,7 +61,7 @@
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor1",
+            "Sid": "VisualEditor6",
             "Effect": "Deny",
             "Action": "s3:DeleteBucket",
             "Resource": "arn:aws:s3:::*terraform-state"
