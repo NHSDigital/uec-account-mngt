@@ -151,6 +151,12 @@
               "glue:GetCrawlerMetrics"
           ],
           "Resource": "*"
+      },
+      {
+        "Sid": "VisualEditor1",
+        "Effect": "Deny",
+        "Action": "dynamodb:DeleteTable",
+        "Resource": "arn:aws:dynamodb:*:*:table/*terraform-state-lock"
       }
   ]
 }

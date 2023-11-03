@@ -12,3 +12,7 @@ variable "attributes" { default = [{
   name = "id"
   type = "S"
 }] }
+variable "deletion_protection_enabled" {
+  description = "True to protect table from accidental deletion"
+  default     = false
+}
