@@ -9,6 +9,7 @@ on:
 
 jobs:
   get-metadata:
+    name: Get metadata
     runs-on: ubuntu-latest
     outputs:
       build_datetime: ${{ steps.metadata.outputs.build_datetime }}
@@ -22,13 +23,17 @@ jobs:
           echo "build_timestamp=$(date --date=$datetime -u +'%Y%m%d%H%M%S')" >> $GITHUB_OUTPUT
           echo "build_epoch=$(date --date=$datetime -u +'%s')" >> $GITHUB_OUTPUT
   scan-secrets:
+    name: Scan code for secrets
     uses: ./.github/workflows/scan-secrets.yaml
   check-file-format:
+    name: Check general formatting
     uses: ./.github/workflows/check-file-format.yaml
   check-markdown-format:
+    name: Check format of markdown files
     uses: ./.github/workflows/check-markdown-format.yaml
   check-terraform-format:
-      uses: ./.github/workflows/check-terraform-format.yaml
+    name: Check format of terraform code
+    uses: ./.github/workflows/check-terraform-format.yaml
   validate-terraform:
     name: Validate terraform code
     uses: ./.github/workflows/validate-terraform.yaml
@@ -36,12 +41,16 @@ jobs:
       ENV: dos-dev
     secrets: inherit
   check-python-black-format:
-      uses: ./.github/workflows/check-python-black-format.yaml
+    name: Check format of python code (black)
+    uses: ./.github/workflows/check-python-black-format.yaml
   check-python-flake-rules:
-      uses: ./.github/workflows/check-python-flake-rules.yaml
+    name: Check python code quality (flake)
+    uses: ./.github/workflows/check-python-flake-rules.yaml
   cloc-repository:
+    name: Count lines of code
     uses: ./.github/workflows/cloc-repository.yaml
   cicd-pipeline-test:
+    name: Test code
     runs-on: ubuntu-latest
     needs:
       [
