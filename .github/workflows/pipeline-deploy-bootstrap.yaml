@@ -12,7 +12,7 @@ jobs:
     uses: ./.github/workflows/derive-tf-version.yaml
   run-bootstrap-dos-dev:
     name: Run bootstrap for dos dev account
-    uses: ./.github/workflows/rerun-bootstrap.yaml
+    uses: ./.github/workflows/deploy-bootstrapper.yaml
     with:
       github_environment: dos-dev
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
@@ -20,7 +20,7 @@ jobs:
     secrets: inherit
   run-bootstrap-dos-test:
     name: Run bootstrap for dos test account
-    uses: ./.github/workflows/rerun-bootstrap.yaml
+    uses: ./.github/workflows/deploy-bootstrapper.yaml
     with:
       github_environment: dos-test
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
@@ -29,7 +29,7 @@ jobs:
   # TODO add other dos related accounts as required
   run-bootstrap-cm-dev:
     name: Run bootstrap for cm dev account
-    uses: ./.github/workflows/rerun-bootstrap.yaml
+    uses: ./.github/workflows/deploy-bootstrapper.yaml
     with:
       github_environment: cm-dev
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
@@ -37,7 +37,7 @@ jobs:
     secrets: inherit
   run-bootstrap-cm-test:
     name: Run bootstrap for cm test account
-    uses: ./.github/workflows/rerun-bootstrap.yaml
+    uses: ./.github/workflows/deploy-bootstrapper.yaml
     with:
       github_environment: cm-test
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}

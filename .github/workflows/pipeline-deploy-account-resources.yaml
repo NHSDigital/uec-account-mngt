@@ -12,6 +12,7 @@ jobs:
     uses: ./.github/workflows/derive-tf-version.yaml
   action-account-infrastructure-dos-dev:
     name: Build account level resources for dos dev account
+    needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: dos-dev
@@ -20,6 +21,7 @@ jobs:
     secrets: inherit
   action-account-infrastructure-dos-test:
     name: Build account level resources for dos test account
+    needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: dos-test
@@ -29,6 +31,7 @@ jobs:
   # TODO add other dos related accounts as required
   action-account-infrastructure-cm-dev:
     name: Build account level resources for cm dev account
+    needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: cm-dev
@@ -37,6 +40,7 @@ jobs:
     secrets: inherit
   action-account-infrastructure-cm-test:
     name: Build account level resources for cm test account
+    needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: cm-test
