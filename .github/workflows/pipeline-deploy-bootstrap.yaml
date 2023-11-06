@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - 'main'
+      - 'task/*'
 
 jobs:
   derive-tf-versions:
@@ -15,7 +16,7 @@ jobs:
     with:
       github_environment: dos-dev
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
-      tf_action: apply
+      tf_action: plan
     secrets: inherit
   run-bootstrap-dos-test:
     name: Run bootstrap for dos test account
@@ -23,7 +24,7 @@ jobs:
     with:
       github_environment: dos-test
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
-      tf_action: apply
+      tf_action: plan
     secrets: inherit
   # TODO add other dos related accounts as required
   run-bootstrap-cm-dev:
@@ -32,7 +33,7 @@ jobs:
     with:
       github_environment: cm-dev
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
-      tf_action: apply
+      tf_action: plan
     secrets: inherit
   run-bootstrap-cm-test:
     name: Run bootstrap for cm test account
@@ -40,6 +41,6 @@ jobs:
     with:
       github_environment: cm-test
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
-      tf_action: apply
+      tf_action: plan
     secrets: inherit
   # TODO add other cm related accounts as required
