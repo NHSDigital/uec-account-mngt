@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - 'main'
-      - 'task/*'
 
 jobs:
   derive-tf-versions:
@@ -16,7 +15,7 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: dos-dev
-      tf_action: plan
+      tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-dos-test:
@@ -25,7 +24,7 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: dos-test
-      tf_action: plan
+      tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   # TODO add other dos related accounts as required
@@ -35,7 +34,7 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: cm-dev
-      tf_action: plan
+      tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-cm-test:
@@ -44,7 +43,7 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: cm-test
-      tf_action: plan
+      tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
     # TODO add other cm related accounts as required
