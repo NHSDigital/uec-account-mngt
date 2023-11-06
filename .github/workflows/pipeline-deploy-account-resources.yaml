@@ -1,0 +1,45 @@
+name: Pipeline deployment of account level resources
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  derive-tf-versions:
+    name: Derive terraform version
+    uses: ./.github/workflows/derive-tf-version.yaml
+  action-account-infrastructure-dos-dev:
+    name: Build account level resources for dos dev account
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: dos-dev
+      tf_action: plan
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
+  action-account-infrastructure-dos-test:
+    name: Build account level resources for dos test account
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: dos-test
+      tf_action: plan
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
+  # TODO add other dos related accounts as required
+  action-account-infrastructure-cm-dev:
+    name: Build account level resources for cm dev account
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: cm-dev
+      tf_action: plan
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
+  action-account-infrastructure-cm-test:
+    name: Build account level resources for cm test account
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: cm-test
+      tf_action: plan
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
+    # TODO add other cm related accounts as required
