@@ -63,6 +63,7 @@ jobs:
         stack:
           - uec-support-role
           - support-tools
+          - uec-poweruser-role
     steps:
 
       - name: Checkout Repository
