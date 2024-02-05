@@ -2,7 +2,7 @@
   "Version": "2012-10-17",
   "Statement": [
       {
-          "Sid": "VisualEditor0",
+          "Sid": "StandardDataPermissions",
           "Effect": "Allow",
           "Action": [
               "athena:List*",
@@ -115,6 +115,63 @@
               "es:ListElasticsearchVersions"
           ],
           "Resource": "*"
+      },
+      {
+        "Sid": "RDSPermissions",
+        "Effect": "Allow",
+        "Action": [
+          "rds:DescribeDBProxyTargetGroups",
+          "rds:DescribeDBInstanceAutomatedBackups",
+          "rds:DescribeDBRecommendations",
+          "rds:DescribeGlobalClusters",
+          "rds:DescribeEngineDefaultParameters",
+          "rds:DescribeRecommendations",
+          "rds:DescribeDBClusterAutomatedBackups",
+          "rds:DescribeDBProxyTargets",
+          "rds:DownloadDBLogFilePortion",
+          "rds:DescribeSourceRegions",
+          "rds:DescribeDBSnapshots",
+          "rds:DescribeDBSecurityGroups",
+          "rds:DescribeReservedDBInstances",
+          "rds:DescribeBlueGreenDeployments",
+          "rds:DescribeValidDBInstanceModifications",
+          "rds:DescribeDbSnapshotTenantDatabases",
+          "rds:DescribeIntegrations",
+          "rds:DescribeOrderableDBInstanceOptions",
+          "rds:DescribeCertificates",
+          "rds:DescribeOptionGroups",
+          "rds:DescribeDBShardGroups",
+          "rds:DescribeDBEngineVersions",
+          "rds:DescribeDBSubnetGroups",
+          "rds:DescribeExportTasks",
+          "rds:DescribeTenantDatabases",
+          "rds:DescribePendingMaintenanceActions",
+          "rds:DescribeDBParameterGroups",
+          "rds:DescribeDBClusterBacktracks",
+          "rds:DescribeReservedDBInstancesOfferings",
+          "rds:DescribeRecommendationGroups",
+          "rds:DescribeDBInstances",
+          "rds:DescribeEngineDefaultClusterParameters",
+          "rds:DescribeDBProxies",
+          "rds:DescribeDBParameters",
+          "rds:DescribeEventCategories",
+          "rds:DescribeDBProxyEndpoints",
+          "rds:DescribeEvents",
+          "rds:DescribeDBClusterSnapshotAttributes",
+          "rds:DescribeDBClusterParameters",
+          "rds:DescribeEventSubscriptions",
+          "rds:DescribeDBLogFiles",
+          "rds:DescribeDBSnapshotAttributes",
+          "rds:ListTagsForResource",
+          "rds:DescribeDBClusterSnapshots",
+          "rds:DescribeOptionGroupOptions",
+          "rds:DownloadCompleteDBLogFile",
+          "rds:DescribeDBClusterEndpoints",
+          "rds:DescribeAccountAttributes",
+          "rds:DescribeDBClusters",
+          "rds:DescribeDBClusterParameterGroups"
+        ],
+        "Resource": "*"
       }
   ]
 }

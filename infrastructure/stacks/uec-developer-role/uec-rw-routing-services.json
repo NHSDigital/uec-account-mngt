@@ -2,7 +2,7 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
+            "Sid": "RoutingPermissionsSpecific",
             "Effect": "Allow",
             "Action": [
                 "wafv2:ListRuleGroups",
@@ -47,12 +47,13 @@
                 "wafv2:ListAvailableManagedRuleGroupVersions",
                 "route53:GetGeoLocation",
                 "route53:ListCidrCollections",
-                "wafv2:CreateAPIKey"
+                "wafv2:CreateAPIKey",
+                "route53domains:ListDomains"
             ],
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor1",
+            "Sid": "RoutingPermissionsGeneral",
             "Effect": "Allow",
             "Action": [
                 "wafv2:*",
@@ -62,7 +63,7 @@
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor2",
+            "Sid": "Ec2Permissions",
             "Effect": "Allow",
             "Action": "ec2:*",
             "Resource": "*"
