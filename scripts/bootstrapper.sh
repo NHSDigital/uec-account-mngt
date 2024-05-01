@@ -47,8 +47,8 @@ if [ -z "$ACCOUNT_TYPE" ] ; then
   echo Set ACCOUNT_TYPE to identify if account is for dev, test, security, preprod or prod
   EXPORTS_SET=1
 else
-  if [[ ! $ACCOUNT_TYPE =~ ^(dev|test|preprod|prod|security) ]]; then
-      echo ACCOUNT_TYPE should be dev test preprod security or prod
+  if [[ ! "$ACCOUNT_TYPE" =~ ^(dev|test|mgmt|preprod|prod|security) ]]; then
+      echo ACCOUNT_TYPE should be set to dev test preprod security mgmt or prod
       EXPORTS_SET=1
   fi
 fi
