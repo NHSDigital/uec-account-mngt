@@ -66,7 +66,7 @@ jobs:
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-dos-preprod:
-    name: Build account level resources for dos integration account
+    name: Build account level resources for dos preprod account
     needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
@@ -75,7 +75,7 @@ jobs:
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-dos-prod:
-    name: Build account level resources for dos integration account
+    name: Build account level resources for dos prod account
     needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
