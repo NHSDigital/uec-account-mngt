@@ -74,3 +74,12 @@ jobs:
       tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
+  action-account-infrastructure-dos-prod:
+    name: Build account level resources for dos integration account
+    needs: derive-tf-versions
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: prod
+      tf_action: apply
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
