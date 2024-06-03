@@ -53,7 +53,7 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: mgmt
-      tf_action: apply
+      tf_action: plan
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-dos-int:
@@ -80,6 +80,6 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: prod
-      tf_action: apply
+      tf_action: plan
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
