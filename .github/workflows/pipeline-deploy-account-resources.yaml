@@ -53,7 +53,7 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: mgmt
-      tf_action: apply
+      tf_action: plan
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-dos-int:
@@ -63,5 +63,23 @@ jobs:
     with:
       github_environment: int
       tf_action: apply
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
+  action-account-infrastructure-dos-preprod:
+    name: Build account level resources for dos preprod account
+    needs: derive-tf-versions
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: preprod
+      tf_action: apply
+      tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
+    secrets: inherit
+  action-account-infrastructure-dos-prod:
+    name: Build account level resources for dos prod account
+    needs: derive-tf-versions
+    uses: ./.github/workflows/action-account-infrastructure.yaml
+    with:
+      github_environment: prod
+      tf_action: plan
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
