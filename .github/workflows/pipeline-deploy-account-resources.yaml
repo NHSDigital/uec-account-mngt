@@ -27,7 +27,6 @@ jobs:
       tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
-  # TODO add other dos related accounts as required
   action-account-infrastructure-cm-dev:
     name: Build account level resources for cm dev account
     needs: derive-tf-versions
@@ -46,14 +45,13 @@ jobs:
       tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
-    # TODO add other cm related accounts as required
   action-account-infrastructure-dos-mgmt:
     name: Build account level resources for dos management account
     needs: derive-tf-versions
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: mgmt
-      tf_action: plan
+      tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
   action-account-infrastructure-dos-int:
@@ -80,6 +78,6 @@ jobs:
     uses: ./.github/workflows/action-account-infrastructure.yaml
     with:
       github_environment: prod
-      tf_action: plan
+      tf_action: apply
       tf_vers: ${{needs.derive-tf-versions.outputs.maxVersion}}
     secrets: inherit
