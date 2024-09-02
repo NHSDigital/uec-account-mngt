@@ -17,7 +17,7 @@ on:
         type: string
 
 jobs:
-  build-dev-policies:
+  build-dev-only-policies:
     if: contains(inputs.github_environment,'dev')
     runs-on: ubuntu-latest
     environment: ${{ inputs.github_environment }}
@@ -52,7 +52,7 @@ jobs:
           export ACCOUNT_TYPE=${{ vars.ACCOUNT_TYPE }}
           /bin/bash ./scripts/action-infra-stack.sh
 
-  build-non-dev-policies:
+  build-universal-policies:
     runs-on: ubuntu-latest
     environment: ${{ inputs.github_environment }}
     permissions:
