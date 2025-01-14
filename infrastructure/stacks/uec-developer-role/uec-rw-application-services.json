@@ -2,7 +2,7 @@
     "Version": "2012-10-17",
     "Statement": [
         {
-            "Sid": "VisualEditor0",
+            "Sid": "AllowSundry",
             "Effect": "Allow",
             "Action": [
                 "schemas:*",
@@ -12,13 +12,13 @@
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor1",
+            "Sid": "AllowApiGateway",
             "Effect": "Allow",
             "Action": "apigateway:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor2",
+            "Sid": "AllowSchemas",
             "Effect": "Allow",
             "Action": [
                 "pipes:ListPipes",
@@ -30,51 +30,57 @@
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor3",
+            "Sid": "AllowPipes",
             "Effect": "Allow",
             "Action": "pipes:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor4",
+            "Sid": "AllowSns",
             "Effect": "Allow",
             "Action": "sns:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor5",
+            "Sid": "AllowLambda",
             "Effect": "Allow",
             "Action": "lambda:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor6",
+            "Sid": "AllowStates",
             "Effect": "Allow",
             "Action": "states:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor7",
+            "Sid": "AllowCloudfront",
             "Effect": "Allow",
             "Action": "cloudfront:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor8",
+            "Sid": "AllowSqs",
             "Effect": "Allow",
             "Action": "sqs:*",
             "Resource": "*"
         },
         {
-            "Sid": "VisualEditor9",
+            "Sid": "AllowEvents",
             "Effect": "Allow",
             "Action": "events:*",
             "Resource": "*"
         },
         {
-          "Sid": "VisualEditor10",
+          "Sid": "AllowCloudshell",
           "Effect": "Allow",
           "Action": "cloudshell:*",
+          "Resource": "*"
+        },
+        {
+          "Sid": "AllowEcs",
+          "Effect": "Allow",
+          "Action": "ecs:*",
           "Resource": "*"
         }
     ]
