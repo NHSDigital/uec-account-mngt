@@ -82,6 +82,16 @@
           "Effect": "Allow",
           "Action": "ecs:*",
           "Resource": "*"
-        }
+        },
+        {
+          "Sid": "AllowOpenSearch",
+          "Effect": "Allow",
+          "Action": [
+              "osis:*",
+              "opensearch:*",
+              "aoss:*"
+          ],
+          "Resource": "*"
+      }
     ]
 }
